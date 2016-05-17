@@ -1,4 +1,4 @@
-package com.xoul.ru.magone.model;
+package com.xoul.ru.magone.view;
 
 public class Unit {
     private int HP;

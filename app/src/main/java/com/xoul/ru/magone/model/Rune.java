@@ -1,5 +1,5 @@
 package com.xoul.ru.magone.model;
 
-public enum Runes {
+public enum Rune {
     Frost,Fire,lifeEnergy,Death,Water,Ground
 }
