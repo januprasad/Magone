@@ -1,13 +1,13 @@
 package com.xoul.ru.magone.model;
 
-public class PlayerFiled {
+public class PlayerField {
     BarField barField;
     UnitField unitField;
     RunesField runesField;
     ControleField controleField;
     private boolean isReverse;
 
-    public PlayerFiled() {
+    public PlayerField() {
         barField = new BarField();
         unitField = new UnitField();
         runesField = new RunesField();
