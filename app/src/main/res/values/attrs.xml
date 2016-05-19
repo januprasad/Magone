@@ -9,4 +9,11 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="Rune">
+        <attr name="type" format="enum">
+            <enum name="fire" value="0" />
+            <enum name="water" value="1" />
+        </attr>
+    </declare-styleable>
+
 </resources>

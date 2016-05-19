@@ -10,11 +10,6 @@ public class PlayerModel {
     private List<Rune> currentSpell;
     Effect eff;
 
-    public PlayerModel(Effect eff) {
-        this.eff = eff;
-        eff.minus();
-    }
-
     public int getHp(){
         return hero.getCurrenthp();
     }
