@@ -13,9 +13,36 @@
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
-    <com.xoul.ru.magone.view.Rune
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        custom:type="fire" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.xoul.ru.magone.view.Rune
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:type="fire" />
+
+        <com.xoul.ru.magone.view.Rune
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:type="water" />
+
+        <com.xoul.ru.magone.view.Rune
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:type="life" />
+
+        <com.xoul.ru.magone.view.Rune
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:type="death" />
+
+    </LinearLayout>
 
 </FrameLayout>
