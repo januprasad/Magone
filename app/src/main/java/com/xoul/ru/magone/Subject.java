@@ -1,7 +1,7 @@
 package com.xoul.ru.magone;
 
 public interface Subject {
-    void addObserver(Object object);
-    void removeObserver(Object object);
-    void notifyObserver(Object object);
+    void addObserver(Observer observer);
+    void removeObserver(Observer observer);
+    void notifyObserver();
 }

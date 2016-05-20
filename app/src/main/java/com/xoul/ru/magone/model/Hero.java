@@ -14,7 +14,12 @@ public class Hero {
         return currenthp;
     }
 
-    public void damage(int damage){
-        currenthp-=damage;
+    public void damage(Damage damage) {
+        currenthp -= damage.damage;
+    }
+
+    public void heal(Heal heal) {
+        currenthp += heal.heal;
+        if (currenthp > MAXHP) currenthp = MAXHP;
     }
 }
