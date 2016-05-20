@@ -23,25 +23,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            custom:type="fire" />
+            custom:type="fire"
+            android:onClick="runeClicked" />
 
         <com.xoul.ru.magone.view.Rune
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            custom:type="water" />
+            custom:type="water"
+            android:onClick="runeClicked" />
 
         <com.xoul.ru.magone.view.Rune
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            custom:type="life" />
+            custom:type="life"
+            android:onClick="runeClicked" />
 
         <com.xoul.ru.magone.view.Rune
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            custom:type="death" />
+            custom:type="death"
+            android:onClick="runeClicked" />
 
     </LinearLayout>
 

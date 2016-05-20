@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.xoul.ru.magone.R;
@@ -13,6 +15,10 @@ public class Rune extends View {
     private static final float BORDER_MULTIPLER = 1 / 10f;
     private Paint paint;
     private RuneStyle style;
+
+    private float x;
+    private float y;
+    private float radius;
 
     public Rune(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -23,16 +29,51 @@ public class Rune extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int w = MeasureSpec.getSize(widthMeasureSpec);
+        int h = MeasureSpec.getSize(heightMeasureSpec);
+        x = w / 2f;
+        y = h / 2f;
+        radius = (h < w) ? h : w; // min(h, w);
+        radius /= 2f;
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
-        int w = getWidth();
-        int h = getHeight();
-        float r = (h < w) ? h : w; // min(h, w);
-        r /= 2f;
         paint.setColor(style.getBorderColor());
-        canvas.drawCircle(w / 2f, h / 2f, r, paint);
-        float r2 = r * (1 - BORDER_MULTIPLER);
+        canvas.drawCircle(x, y, radius, paint);
+        float r2 = radius * (1 - BORDER_MULTIPLER);
         paint.setColor(style.getColor());
-        canvas.drawCircle(w / 2f, h / 2f, r2, paint);
+        canvas.drawCircle(x, y, r2, paint);
+    }
+
+    private boolean isInsideCircle(float x, float y) {
+        return Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) <= radius;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        float x = event.getX();
+        float y = event.getY();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_SCROLL:
+                Log.d("Rune view", "action down");
+                if (isInsideCircle(x, y)) {
+                    return super.onTouchEvent(event);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                Log.d("Rune view", "action up");
+                if (isInsideCircle(x, y)) {
+                    return super.onTouchEvent(event);
+                }
+                break;
+        }
+        return true;
     }
 
     // using order of attrs.xml type enum
