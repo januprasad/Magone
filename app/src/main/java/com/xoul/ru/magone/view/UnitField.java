@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.View;
 
 public class UnitField extends View {
-    Unit Warrior;
-    Unit Entity;
-    Unit provoker;
+//    Unit Warrior;
+//    Unit Entity;
+//    Unit provoker;
 
     public UnitField(Context context) {
         super(context);
