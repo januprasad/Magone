@@ -11,7 +11,7 @@ import android.view.View;
 import com.xoul.ru.magone.R;
 
 public class Rune extends View {
-    private static final float BORDER_MULTIPLER = 1 / 10f;
+    private static final float BORDER_MULTIPLIER = 1 / 10f;
     private Paint paint;
     private RuneStyle style;
 
@@ -50,7 +50,7 @@ public class Rune extends View {
         y = h / 2f;
         radius = (h < w) ? h : w; // min(h, w);
         radius /= 2f;
-        insideRadius = radius - 2 * radius * BORDER_MULTIPLER;
+        insideRadius = radius - 2 * radius * BORDER_MULTIPLIER;
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

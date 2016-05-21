@@ -13,7 +13,7 @@ import android.view.View;
 import com.xoul.ru.magone.R;
 
 public class ManaBar extends View implements ValueAnimator.AnimatorUpdateListener {
-    private static final float BORDER_MULTIPLER = 1 / 10f;
+    private static final float BORDER_MULTIPLIER = 1 / 10f;
     private static final int BORDER_COLOR = 0xff0000aa;
     private static final int BACKGROUND_COLOR = 0xff111111;
     private static final int COLOR = 0xff0000ff;
@@ -91,7 +91,7 @@ public class ManaBar extends View implements ValueAnimator.AnimatorUpdateListene
         int h = MeasureSpec.getSize(heightMeasureSpec);
         outsideRect.set(0, 0, w, h);
         int border = (w < h) ? w : h; // min(w, h);
-        border *= BORDER_MULTIPLER;
+        border *= BORDER_MULTIPLIER;
         insideRect.set(border, border, w - border, h - border);
         makeMpMeasurements();
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
