@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -26,6 +25,14 @@ public class Rune extends View {
         int runeIndex = typedArray.getInteger(R.styleable.Rune_type, 0);
         style = RuneStyle.values()[runeIndex];
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    }
+
+    public void setStyle(RuneStyle style) {
+        this.style = style;
+    }
+
+    public RuneStyle getStyle() {
+        return style;
     }
 
     @Override
@@ -49,7 +56,7 @@ public class Rune extends View {
     }
 
     private boolean isInsideCircle(float x, float y) {
-        return Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) <= radius;
+        return Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) <= Math.pow(radius, 2);
     }
 
     @Override
@@ -59,17 +66,22 @@ public class Rune extends View {
         float y = event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_SCROLL:
-                Log.d("Rune view", "action down");
+            case MotionEvent.ACTION_POINTER_DOWN:
                 if (isInsideCircle(x, y)) {
-                    return super.onTouchEvent(event);
+                    setPressed(true);
                 }
                 break;
             case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL:
-                Log.d("Rune view", "action up");
-                if (isInsideCircle(x, y)) {
-                    return super.onTouchEvent(event);
+                if (isPressed() && isInsideCircle(x, y)) {
+                    performClick();
+                }
+                setPressed(false);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (isPressed() && !isInsideCircle(x, y)) {
+                    setPressed(false);
                 }
                 break;
         }
@@ -77,7 +89,7 @@ public class Rune extends View {
     }
 
     // using order of attrs.xml type enum
-    private enum RuneStyle {
+    public enum RuneStyle {
         FIRE(0xffff0000, 0xffaa0000),
         WATER(0xff0000ff, 0xff0000aa),
         LIFE(0xff00ff00, 0xff00aa00),

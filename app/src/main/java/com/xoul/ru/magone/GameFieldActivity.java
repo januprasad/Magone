@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.xoul.ru.magone.view.Rune;
+
 public class GameFieldActivity extends Activity {
 
     @Override
@@ -14,6 +16,7 @@ public class GameFieldActivity extends Activity {
     }
 
     public void runeClicked(View view) {
-        Toast.makeText(getApplicationContext(), "Rune clicked: ", Toast.LENGTH_SHORT).show();
+        Rune rune = (Rune) view;
+        Toast.makeText(getApplicationContext(), "Rune clicked: " + rune.getStyle(), Toast.LENGTH_SHORT).show();
     }
 }
