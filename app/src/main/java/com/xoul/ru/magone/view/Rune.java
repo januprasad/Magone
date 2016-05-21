@@ -51,8 +51,18 @@ public class Rune extends View {
         paint.setColor(style.getBorderColor());
         canvas.drawCircle(x, y, radius, paint);
         float r2 = radius * (1 - BORDER_MULTIPLER);
-        paint.setColor(style.getColor());
+        if (isPressed()) {
+            paint.setColor(style.getPressedColor());
+        } else {
+            paint.setColor(style.getColor());
+        }
         canvas.drawCircle(x, y, r2, paint);
+    }
+
+    @Override
+    public void setPressed(boolean pressed) {
+        super.setPressed(pressed);
+        invalidate();
     }
 
     private boolean isInsideCircle(float x, float y) {
@@ -108,6 +118,10 @@ public class Rune extends View {
         }
 
         public int getBorderColor() {
+            return borderColor;
+        }
+
+        public int getPressedColor() {
             return borderColor;
         }
     }
