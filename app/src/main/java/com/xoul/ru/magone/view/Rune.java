@@ -20,6 +20,12 @@ public class Rune extends View {
     private float radius;
     private float insideRadius;
 
+    public Rune(Context context) {
+        super(context);
+        style = RuneStyle.values()[0];
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    }
+
     public Rune(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Rune, 0, 0);

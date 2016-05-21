@@ -21,40 +21,9 @@
         custom:mp="6"
         custom:maxMp="10" />
 
-    <LinearLayout
+    <com.xoul.ru.magone.view.RuneField
+        android:id="@+id/rune_field"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <com.xoul.ru.magone.view.Rune
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            custom:type="fire"
-            android:onClick="runeClicked" />
-
-        <com.xoul.ru.magone.view.Rune
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            custom:type="water"
-            android:onClick="runeClicked" />
-
-        <com.xoul.ru.magone.view.Rune
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            custom:type="life"
-            android:onClick="runeClicked" />
-
-        <com.xoul.ru.magone.view.Rune
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            custom:type="death"
-            android:onClick="runeClicked" />
-
-    </LinearLayout>
+        android:layout_height="50dp" />
 
 </LinearLayout>

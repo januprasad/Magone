@@ -5,7 +5,7 @@ import android.content.Context;
 public class PlayerField extends android.view.View {
     PlayerInfoField playerInfoField;
     UnitField unitField;
-    RunesField runesField;
+    RuneField runeField;
     ControlField controlField;
     private boolean isReverse;
 

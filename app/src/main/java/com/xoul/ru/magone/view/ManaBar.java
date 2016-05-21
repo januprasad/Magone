@@ -31,19 +31,30 @@ public class ManaBar extends View implements ValueAnimator.AnimatorUpdateListene
     private int mp;
     private int maxMp;
 
+    public ManaBar(Context context) {
+        super(context);
+        mp = 1;
+        maxMp = 1;
+        init();
+    }
+
     public ManaBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ManaBar, 0, 0);
         mp = typedArray.getInteger(R.styleable.ManaBar_mp, 0);
         maxMp = typedArray.getInteger(R.styleable.ManaBar_maxMp, 1);
+        init();
+    }
+
+    private void init() {
         outsideRect = new Rect(0, 0, 0, 0);
         insideRect = new Rect(0, 0, 0, 0);
         filledRect = new Rect(0, 0, 0, 0);
+        bounds = new Rect(0, 0, 0, 0);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setTypeface(Typeface.create("Roboto", Typeface.NORMAL));
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(TEXT_SIZE);
-        bounds = new Rect(0, 0, 0, 0);
     }
 
     public int getMp() {
