@@ -22,11 +22,11 @@ public class GameFieldActivity extends Activity implements OnRuneClickedListener
 
     @Override
     public void onRuneClicked(Rune.RuneStyle runeStyle) {
-        int mp = manaBar.getMp();
+        int mp = manaBar.getValue();
         mp--;
         if (mp < 0) {
-            mp = manaBar.getMaxMp();
+            mp = manaBar.getMaxValue();
         }
-        manaBar.setMp(mp);
+        manaBar.setValue(mp);
     }
 }

@@ -18,9 +18,9 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="ManaBar">
-        <attr name="mp" format="integer" />
-        <attr name="maxMp" format="integer" />
+    <declare-styleable name="ValueProgressBar">
+        <attr name="value" format="integer" />
+        <attr name="maxValue" format="integer" />
     </declare-styleable>
 
 </resources>

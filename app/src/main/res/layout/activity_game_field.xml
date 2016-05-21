@@ -22,8 +22,8 @@
         android:id="@+id/manaBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        custom:mp="6"
-        custom:maxMp="10" />
+        custom:value="6"
+        custom:maxValue="10" />
 
     <com.xoul.ru.magone.view.RuneField
         android:id="@+id/rune_field"
