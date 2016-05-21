@@ -18,6 +18,7 @@ public class Rune extends View {
     private float x;
     private float y;
     private float radius;
+    private float insideRadius;
 
     public Rune(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -43,6 +44,7 @@ public class Rune extends View {
         y = h / 2f;
         radius = (h < w) ? h : w; // min(h, w);
         radius /= 2f;
+        insideRadius = radius - 2 * radius * BORDER_MULTIPLER;
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -50,13 +52,12 @@ public class Rune extends View {
     protected void onDraw(Canvas canvas) {
         paint.setColor(style.getBorderColor());
         canvas.drawCircle(x, y, radius, paint);
-        float r2 = radius * (1 - BORDER_MULTIPLER);
         if (isPressed()) {
             paint.setColor(style.getPressedColor());
         } else {
             paint.setColor(style.getColor());
         }
-        canvas.drawCircle(x, y, r2, paint);
+        canvas.drawCircle(x, y, insideRadius, paint);
     }
 
     @Override
