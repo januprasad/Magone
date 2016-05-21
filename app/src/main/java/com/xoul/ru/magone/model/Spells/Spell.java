@@ -1,6 +1,4 @@
-package com.xoul.ru.magone.model.Spells;
-
-import android.graphics.Canvas;
+package com.xoul.ru.magone.model.spells;
 
 import com.xoul.ru.magone.model.Damage;
 import com.xoul.ru.magone.model.Effect;
@@ -12,7 +10,6 @@ public class Spell {
     public SpellType spellType;
     public Heal heal;
     public EffectType effectType;
-    public Effect effect;
     public Damage damage;
     public PlayerModel target;
     private boolean settingEffect = true;
@@ -22,6 +19,7 @@ public class Spell {
         this.spellType = spellType;
         this.heal = heal;
         this.damage = damage;
+        effectType = damage.effectType;
     }
 
     public boolean isSettingEffect() {

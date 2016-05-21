@@ -1,8 +1,9 @@
 package com.xoul.ru.magone.model;
 
-import com.xoul.ru.magone.model.Effects.BurningEffect;
-import com.xoul.ru.magone.model.Spells.Spell;
-import com.xoul.ru.magone.model.Spells.SpellType;
+import com.xoul.ru.magone.model.effects.BurningEffect;
+import com.xoul.ru.magone.model.spells.Spell;
+import com.xoul.ru.magone.model.spells.SpellFactory;
+import com.xoul.ru.magone.model.spells.SpellType;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class PlayerModel {
         }
         //вешаем эффект
         if (spell.isSettingEffect()) addEffect(spell.effectType);
+
     }
 
     //Наносит целочисленный урон игроку
@@ -91,5 +93,11 @@ public class PlayerModel {
         for (Effect eff : currentEffects) {
             eff.endOfTurn();
         }
+    }
+
+    //собирает заклинание из уже переданных
+    public Spell createSpell(){
+        spell = SpellFactory.create(currentSpell);
+        return spell;
     }
 }

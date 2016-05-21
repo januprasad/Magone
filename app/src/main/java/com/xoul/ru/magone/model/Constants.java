@@ -1,5 +1,5 @@
 package com.xoul.ru.magone.model;
 
 public class Constants {
-    public final int BURNINGTIME = 5;
+    public static final int BURNINGTIME = 5;
 }

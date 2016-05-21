@@ -1,4 +1,4 @@
-package com.xoul.ru.magone.model.Effects;
+package com.xoul.ru.magone.model.effects;
 
 import com.xoul.ru.magone.model.Damage;
 import com.xoul.ru.magone.model.Effect;
