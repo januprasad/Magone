@@ -1,5 +1,6 @@
 package com.xoul.ru.magone.view;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -11,13 +12,15 @@ import android.view.View;
 
 import com.xoul.ru.magone.R;
 
-public class ManaBar extends View {
+public class ManaBar extends View implements ValueAnimator.AnimatorUpdateListener {
     private static final float BORDER_MULTIPLER = 1 / 10f;
     private static final int BORDER_COLOR = 0xff0000aa;
     private static final int BACKGROUND_COLOR = 0xff111111;
     private static final int COLOR = 0xff0000ff;
     private static final int TEXT_COLOR = 0xffffffff;
     private static final float TEXT_SIZE = 50f;
+
+    private static final long ANIMATION_DURATION = 250;
 
     private Rect outsideRect;
     private Rect insideRect;
@@ -55,7 +58,7 @@ public class ManaBar extends View {
         } else  {
             this.mp = mp;
         }
-        invalidate();
+        onMpChanged();
     }
 
     public int getMaxMp() {
@@ -68,7 +71,7 @@ public class ManaBar extends View {
         } else {
             this.maxMp = maxMp;
         }
-        invalidate();
+        onMpChanged();
     }
 
     @Override
@@ -79,6 +82,7 @@ public class ManaBar extends View {
         int border = (w < h) ? w : h; // min(w, h);
         border *= BORDER_MULTIPLER;
         insideRect.set(border, border, w - border, h - border);
+        makeMpMeasurements();
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -89,7 +93,6 @@ public class ManaBar extends View {
         paint.setColor(BACKGROUND_COLOR);
         canvas.drawRect(insideRect, paint);
         paint.setColor(COLOR);
-        makeMpMeasurements();
         canvas.drawRect(filledRect, paint);
         paint.setColor(TEXT_COLOR);
         makeTextMeasurements();
@@ -98,6 +101,22 @@ public class ManaBar extends View {
                 outsideRect.centerY() - bounds.centerY(),
                 paint
         );
+    }
+
+    @Override
+    public void onAnimationUpdate(ValueAnimator animation) {
+        filledRect.right = (Integer) animation.getAnimatedValue();
+        invalidate();
+    }
+
+    private void onMpChanged() {
+        int currentRight = filledRect.right;
+        makeMpMeasurements();
+        int newRight = filledRect.right;
+        ValueAnimator animator = ValueAnimator.ofInt(currentRight, newRight);
+        animator.setDuration(ANIMATION_DURATION);
+        animator.addUpdateListener(this);
+        animator.start();
     }
 
     private String getText() {
