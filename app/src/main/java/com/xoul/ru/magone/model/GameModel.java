@@ -2,7 +2,6 @@ package com.xoul.ru.magone.model;
 
 import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.Subject;
-import com.xoul.ru.magone.view.GameField;
 
 public class GameModel implements Subject {
     Observer view;
@@ -26,21 +25,22 @@ public class GameModel implements Subject {
         }
     }
 
-    public void castASpell(){
-       currentPlayer.setSpell( currentPlayer.createSpell());
+    public void castASpell() {
+        currentPlayer.setSpell(currentPlayer.createSpell());
     }
 
-    public static PlayerModel getCurrentPlayer(){
+    public static PlayerModel getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public static  PlayerModel getEnemy(){
-        if(player1 == currentPlayer){
+    public static PlayerModel getEnemy() {
+        if (player1 == currentPlayer) {
             return player2;
-        }else{
+        } else {
             return player1;
         }
     }
+
     @Override
     public void addObserver(Observer observer) {
         view = observer;

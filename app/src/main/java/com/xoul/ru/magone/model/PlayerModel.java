@@ -65,11 +65,11 @@ public class PlayerModel {
     //добавляет к текущим эффектам висящим на игроке новый переданного типа
     public void addEffect(EffectType effectType) {
         Effect effect = null;
-        if (effectType == EffectType.Fire) {
+        if (effectType == EffectType.FIRE) {
             effect = new BurningEffect(Constants.BURNINGTIME, true, effectType);
         }
         for (Effect eff : currentEffects) {
-            if (eff.type == EffectType.Fire)
+            if (eff.type == EffectType.FIRE)
                 currentEffects.remove(eff);
         }
         if (effect != null)
@@ -96,7 +96,7 @@ public class PlayerModel {
     }
 
     //собирает заклинание из уже переданных
-    public Spell createSpell(){
+    public Spell createSpell() {
         spell = SpellFactory.create(currentSpell);
         return spell;
     }

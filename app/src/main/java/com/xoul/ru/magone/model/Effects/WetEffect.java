@@ -11,13 +11,13 @@ public class WetEffect extends Effect {
 
     @Override
     public Damage damage(Damage damage) {
-        if(damage.effectType == EffectType.Fire)
-            damage.damage-=3;
         return damage;
     }
 
     @Override
     public boolean isOpposite(EffectType type) {
+        if (type == EffectType.FIRE)
+            return true;
         return false;
     }
 }
