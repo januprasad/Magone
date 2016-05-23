@@ -20,9 +20,9 @@ public class PlayerModel {
     }
 
     //Приводит в действие переданное заклинание, проверяя его тип и изменяя в соответсвии с имющимися эффектами
-    public void setSpell(Spell spell) {
+    public void setSpell(Spell spell,PlayerModel enemy) {
         if (spell.spellType == SpellType.Damage) {
-            for (Effect eff : currentEffects) {
+            for (Effect eff : enemy.currentEffects) {
                 eff.damage(spell.damage);
                 eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
             }
@@ -31,7 +31,7 @@ public class PlayerModel {
                 spell.target.damage(spell.damage);
         }
         if (spell.spellType == SpellType.Heal) {
-            for (Effect eff : currentEffects) {
+            for (Effect eff : enemy.currentEffects) {
                 eff.heal(spell.heal);
                 eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
             }

@@ -26,7 +26,7 @@ public class GameModel implements Subject {
     }
 
     public void castASpell() {
-        currentPlayer.setSpell(currentPlayer.createSpell());
+        currentPlayer.setSpell(currentPlayer.createSpell(),getEnemy());
     }
 
     public static PlayerModel getCurrentPlayer() {
