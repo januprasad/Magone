@@ -1,4 +1,4 @@
-package com.xoul.ru.magone.view;
+package com.xoul.ru.magone.view.player.unit;
 
 import android.content.Context;
 import android.graphics.Canvas;

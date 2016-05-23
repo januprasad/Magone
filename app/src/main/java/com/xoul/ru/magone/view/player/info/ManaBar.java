@@ -1,7 +1,9 @@
-package com.xoul.ru.magone.view;
+package com.xoul.ru.magone.view.player.info;
 
 import android.content.Context;
 import android.util.AttributeSet;
+
+import com.xoul.ru.magone.view.other.ValueProgressBar;
 
 public class ManaBar extends ValueProgressBar {
     public ManaBar(Context context) {

@@ -3,12 +3,12 @@ package com.xoul.ru.magone;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.xoul.ru.magone.view.ManaBar;
-import com.xoul.ru.magone.view.Rune;
-import com.xoul.ru.magone.view.RuneField;
-import com.xoul.ru.magone.view.RuneField.OnRuneClickedListener;
-import com.xoul.ru.magone.view.Unit;
-import com.xoul.ru.magone.view.UnitField;
+import com.xoul.ru.magone.view.player.info.ManaBar;
+import com.xoul.ru.magone.view.player.rune.Rune;
+import com.xoul.ru.magone.view.player.rune.RuneField;
+import com.xoul.ru.magone.view.player.rune.RuneField.OnRuneClickedListener;
+import com.xoul.ru.magone.view.player.unit.Unit;
+import com.xoul.ru.magone.view.player.unit.UnitField;
 
 public class GameFieldActivity extends Activity implements OnRuneClickedListener {
     private ManaBar manaBar;

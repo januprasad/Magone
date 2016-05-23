@@ -1,4 +1,4 @@
-package com.xoul.ru.magone.view;
+package com.xoul.ru.magone.view.player.rune;
 
 import android.content.Context;
 import android.util.AttributeSet;
