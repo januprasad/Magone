@@ -1,6 +1,11 @@
-package com.xoul.ru.magone.view;
+package com.xoul.ru.magone.view.player;
 
 import android.content.Context;
+
+import com.xoul.ru.magone.view.player.control.ControlField;
+import com.xoul.ru.magone.view.player.info.PlayerInfoField;
+import com.xoul.ru.magone.view.player.rune.RuneField;
+import com.xoul.ru.magone.view.player.unit.UnitField;
 
 public class PlayerField extends android.view.View {
     PlayerInfoField playerInfoField;

@@ -14,18 +14,19 @@
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
-    <com.xoul.ru.magone.view.UnitImage
-        android:layout_width="100dp"
+    <com.xoul.ru.magone.view.player.unit.UnitField
+        android:id="@+id/unitField"
+        android:layout_width="match_parent"
         android:layout_height="150dp" />
 
-    <com.xoul.ru.magone.view.ManaBar
+    <com.xoul.ru.magone.view.player.info.ManaBar
         android:id="@+id/manaBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         custom:value="6"
         custom:maxValue="10" />
 
-    <com.xoul.ru.magone.view.RuneField
+    <com.xoul.ru.magone.view.player.rune.RuneField
         android:id="@+id/rune_field"
         android:layout_width="match_parent"
         android:layout_height="50dp" />

@@ -1,4 +1,4 @@
-package com.xoul.ru.magone.view;
+package com.xoul.ru.magone.view.other;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
