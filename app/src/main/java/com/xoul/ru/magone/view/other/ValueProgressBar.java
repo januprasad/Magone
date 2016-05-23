@@ -37,6 +37,13 @@ public class ValueProgressBar extends View implements ValueAnimator.AnimatorUpda
         init();
     }
 
+    public ValueProgressBar(Context context, int value, int maxValue) {
+        super(context);
+        this.value = value;
+        this.maxValue = maxValue;
+        init();
+    }
+
     public ValueProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ValueProgressBar, 0, 0);

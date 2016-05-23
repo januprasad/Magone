@@ -3,7 +3,7 @@ package com.xoul.ru.magone;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.xoul.ru.magone.view.player.info.ManaBar;
+import com.xoul.ru.magone.view.player.info.PlayerInfoField;
 import com.xoul.ru.magone.view.player.rune.Rune;
 import com.xoul.ru.magone.view.player.rune.RuneField;
 import com.xoul.ru.magone.view.player.rune.RuneField.OnRuneClickedListener;
@@ -11,14 +11,14 @@ import com.xoul.ru.magone.view.player.unit.Unit;
 import com.xoul.ru.magone.view.player.unit.UnitField;
 
 public class GameFieldActivity extends Activity implements OnRuneClickedListener {
-    private ManaBar manaBar;
+    private PlayerInfoField playerInfo;
     private UnitField unitField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
-        manaBar = (ManaBar) findViewById(R.id.manaBar);
+        playerInfo = (PlayerInfoField) findViewById(R.id.playerInfo);
         RuneField field = (RuneField) findViewById(R.id.rune_field);
         field.setOnRuneClickedListener(this);
         unitField = (UnitField) findViewById(R.id.unitField);
@@ -26,12 +26,12 @@ public class GameFieldActivity extends Activity implements OnRuneClickedListener
 
     @Override
     public void onRuneClicked(Rune.RuneStyle runeStyle) {
-        int mp = manaBar.getValue();
+        int mp = playerInfo.getMp();
         mp--;
         if (mp < 0) {
-            mp = manaBar.getMaxValue();
+            mp = playerInfo.getMaxMp();
         }
-        manaBar.setValue(mp);
+        playerInfo.setMp(mp);
         switch (runeStyle) {
             case DEATH:
                 unitField.removeAllUnits();

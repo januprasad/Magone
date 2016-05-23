@@ -2,10 +2,11 @@ package com.xoul.ru.magone.view.player.unit;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.xoul.ru.magone.view.other.Utils;
 
 public class UnitField extends LinearLayout {
     private static final int UNIT_WIDTH_DP = 100;
@@ -31,9 +32,9 @@ public class UnitField extends LinearLayout {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
 
-        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, UNIT_WIDTH_DP, getResources().getDisplayMetrics());
-        int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, UNIT_MARGIN_DP, getResources().getDisplayMetrics());
-        layoutParams = new LayoutParams(height, ViewGroup.LayoutParams.MATCH_PARENT);
+        int width = Utils.dpPx(getContext(), UNIT_WIDTH_DP);
+        int margin = Utils.dpPx(getContext(), UNIT_MARGIN_DP);
+        layoutParams = new LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(margin, margin, margin, margin);
     }
 
