@@ -13,11 +13,11 @@ public class SpellFactory {
     public static Spell create(List<Rune> list) {
         if (list.size() == 1) {
             if (list.get(0) == Rune.FIRE) {
-                return new Spell(getEnemy(), SpellType.Damage, null, new Damage(5, EffectType.FIRE),list.size());  //Заклинание огня наносящее  урон и вешающее эффект горения
+                return new Spell(getEnemy(), SpellType.Damage, null, new Damage(5, EffectType.FIRE),list.size());  //Р—Р°РєР»РёРЅР°РЅРёРµ РѕРіРЅСЏ РЅР°РЅРѕСЃСЏС‰РµРµ  СѓСЂРѕРЅ Рё РІРµС€Р°СЋС‰РµРµ СЌС„С„РµРєС‚ РіРѕСЂРµРЅРёСЏ
             } else if (list.get(0) == Rune.WATER) {
-                return new Spell(getEnemy(), SpellType.Damage, null, new Damage(0, EffectType.WET),list.size());  //Заклинание воды не наносящее урон и вешающее эффект сырости
+                return new Spell(getEnemy(), SpellType.Damage, null, new Damage(0, EffectType.WET),list.size());  //Р—Р°РєР»РёРЅР°РЅРёРµ РІРѕРґС‹ РЅРµ РЅР°РЅРѕСЃСЏС‰РµРµ СѓСЂРѕРЅ Рё РІРµС€Р°СЋС‰РµРµ СЌС„С„РµРєС‚ СЃС‹СЂРѕСЃС‚Рё
             } else if (list.get(0) == Rune.lIFE) {
-                return new Spell(getEnemy(), SpellType.Heal, new Heal(4), new Damage(0, EffectType.HEAL),list.size());  //Заклинание жизненной энергии восстанавливающее  здоровье
+                return new Spell(getEnemy(), SpellType.Heal, new Heal(4), new Damage(0, EffectType.HEAL),list.size());  //Р—Р°РєР»РёРЅР°РЅРёРµ Р¶РёР·РЅРµРЅРЅРѕР№ СЌРЅРµСЂРіРёРё РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°СЋС‰РµРµ  Р·РґРѕСЂРѕРІСЊРµ
             }
             return null;
         } else {
