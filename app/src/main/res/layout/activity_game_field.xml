@@ -14,8 +14,9 @@
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
-    <com.xoul.ru.magone.view.UnitImage
-        android:layout_width="100dp"
+    <com.xoul.ru.magone.view.UnitField
+        android:id="@+id/unitField"
+        android:layout_width="match_parent"
         android:layout_height="150dp" />
 
     <com.xoul.ru.magone.view.ManaBar
