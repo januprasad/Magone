@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.xoul.ru.magone.view.other.Utils;
 
 public class UnitField extends LinearLayout {
-    private static final int UNIT_WIDTH_DP = 100;
+    private static final int UNIT_WIDTH_DP = 75;
     private static final int UNIT_MARGIN_DP = 5;
     private LayoutParams layoutParams;
 

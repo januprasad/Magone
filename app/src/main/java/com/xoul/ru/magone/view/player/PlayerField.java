@@ -12,6 +12,8 @@ import com.xoul.ru.magone.view.player.rune.RuneField;
 import com.xoul.ru.magone.view.player.unit.UnitField;
 
 public class PlayerField extends LinearLayout {
+    private static final int MARGIN_DP = 10;
+
     UnitField unitField;
     PlayerInfoField playerInfoField;
     RuneField runeField;
@@ -30,20 +32,23 @@ public class PlayerField extends LinearLayout {
     private void initViews(Context context) {
         setOrientation(VERTICAL);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                Utils.dpPx(context, 150));
-
+                Utils.dpPx(context, 125));
+        //params.setMargins(MARGIN_DP, MARGIN_DP, MARGIN_DP, MARGIN_DP / 2);
         unitField = new UnitField(context);
         addView(unitField, params);
 
-        params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dpPx(context, 50));
+        params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dpPx(context, 25));
+        params.setMargins(MARGIN_DP, MARGIN_DP / 2, MARGIN_DP, MARGIN_DP / 2);
         playerInfoField = new PlayerInfoField(context);
         addView(playerInfoField, params);
 
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dpPx(context, 50));
+        params.setMargins(MARGIN_DP, MARGIN_DP / 2, MARGIN_DP, MARGIN_DP /2);
         runeField = new RuneField(context);
         addView(runeField, params);
 
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(MARGIN_DP, MARGIN_DP / 2, MARGIN_DP, MARGIN_DP);
         controlField = new ControlField(context);
         addView(controlField, params);
     }

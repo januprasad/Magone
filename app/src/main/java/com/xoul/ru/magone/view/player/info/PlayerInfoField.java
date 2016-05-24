@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import com.xoul.ru.magone.view.other.Utils;
 
 public class PlayerInfoField extends LinearLayout {
-    private static final int MANA_BAR_HEIGHT_DP = 50;
+    private static final int MANA_BAR_HEIGHT_DP = 25;
     private LayoutParams params;
 
     private ManaBar manaBar;
