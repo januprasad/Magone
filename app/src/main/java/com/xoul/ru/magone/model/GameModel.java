@@ -4,6 +4,9 @@ import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.Subject;
 import com.xoul.ru.magone.model.spells.Spell;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class GameModel implements Subject {
     Observer view;
     private static PlayerModel currentPlayer;
@@ -11,8 +14,9 @@ public class GameModel implements Subject {
     private static PlayerModel player2;
 
     public void Model() {
-        player1 = new PlayerModel();
-        player2 = new PlayerModel();
+        player1 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
+        player2 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
+        currentPlayer = player1;
     }
 
     public void endOfTurn() {

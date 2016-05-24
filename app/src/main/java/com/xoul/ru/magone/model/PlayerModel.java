@@ -16,6 +16,13 @@ public class PlayerModel {
     private List<Rune> currentSpell;
     private Spell spell;
 
+    public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects) {
+        this.hero = hero;
+        this.mp = mp;
+        this.currentSpell = currentSpell;
+        this.currentEffects = currentEffects;
+    }
+
     public int getHp() {
         return hero.getCurrenthp();
     }
