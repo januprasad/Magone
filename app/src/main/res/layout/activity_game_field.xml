@@ -17,6 +17,12 @@
     <com.xoul.ru.magone.view.player.PlayerField
         android:id="@+id/playerField"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rotation="180" />
+
+    <com.xoul.ru.magone.view.player.PlayerField
+        android:id="@+id/playerField2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
