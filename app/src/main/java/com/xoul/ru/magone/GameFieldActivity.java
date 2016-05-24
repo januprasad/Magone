@@ -4,34 +4,30 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.xoul.ru.magone.view.player.control.ControlField;
+import com.xoul.ru.magone.view.player.PlayerField;
 import com.xoul.ru.magone.view.player.control.ControlField.OnControlClickedListener;
 import com.xoul.ru.magone.view.player.info.PlayerInfoField;
 import com.xoul.ru.magone.view.player.rune.Rune;
-import com.xoul.ru.magone.view.player.rune.RuneField;
 import com.xoul.ru.magone.view.player.rune.RuneField.OnRuneClickedListener;
 import com.xoul.ru.magone.view.player.unit.Unit;
 import com.xoul.ru.magone.view.player.unit.UnitField;
 
 public class GameFieldActivity extends Activity implements OnRuneClickedListener, OnControlClickedListener {
-    private PlayerInfoField playerInfo;
-    private UnitField unitField;
-    private ControlField controlField;
+    private PlayerField playerField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
-        playerInfo = (PlayerInfoField) findViewById(R.id.playerInfo);
-        RuneField field = (RuneField) findViewById(R.id.rune_field);
-        field.setOnRuneClickedListener(this);
-        unitField = (UnitField) findViewById(R.id.unitField);
-        controlField = (ControlField) findViewById(R.id.controlField);
-        controlField.setOnControlClickedListener(this);
+        playerField = (PlayerField) findViewById(R.id.playerField);
+        playerField.getRuneField().setOnRuneClickedListener(this);
+        playerField.getControlField().setOnControlClickedListener(this);
     }
 
     @Override
     public void onRuneClicked(Rune.RuneStyle runeStyle) {
+        PlayerInfoField playerInfo = playerField.getPlayerInfoField();
+        UnitField unitField = playerField.getUnitField();
         int mp = playerInfo.getMp();
         mp--;
         if (mp < 0) {

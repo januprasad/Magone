@@ -14,8 +14,17 @@ public class ControlField extends LinearLayout implements View.OnClickListener {
 
     private OnControlClickedListener listener;
 
+    public ControlField(Context context) {
+        super(context);
+        initViews(context);
+    }
+
     public ControlField(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initViews(context);
+    }
+
+    private void initViews(Context context) {
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER);
         params = new LayoutParams(Utils.dpPx(context, 200), Utils.dpPx(context, 50));

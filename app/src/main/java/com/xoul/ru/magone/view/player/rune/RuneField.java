@@ -9,8 +9,17 @@ import android.widget.LinearLayout;
 public class RuneField extends LinearLayout implements View.OnClickListener {
     private OnRuneClickedListener listener;
 
+    public RuneField(Context context) {
+        super(context);
+        initViews(context);
+    }
+
     public RuneField(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initViews(context);
+    }
+
+    private void initViews(Context context) {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
         for (Rune.RuneStyle runeStyle : Rune.RuneStyle.values()) {
