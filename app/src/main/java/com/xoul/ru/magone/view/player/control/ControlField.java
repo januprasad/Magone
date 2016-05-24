@@ -1,10 +1,41 @@
 package com.xoul.ru.magone.view.player.control;
 
 import android.content.Context;
-import android.view.*;
+import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
 
-public class ControlField extends View {
-    public ControlField(Context context) {
-        super(context);
+import com.xoul.ru.magone.view.other.Utils;
+
+public class ControlField extends LinearLayout implements View.OnClickListener {
+    private LayoutParams params;
+    private CastButton castButton;
+
+    private OnControlClickedListener listener;
+
+    public ControlField(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        setOrientation(VERTICAL);
+        setGravity(Gravity.CENTER);
+        params = new LayoutParams(Utils.dpPx(context, 200), Utils.dpPx(context, 50));
+        castButton = new CastButton(context);
+        castButton.setOnClickListener(this);
+        addView(castButton, params);
+    }
+
+    public void setOnControlClickedListener(OnControlClickedListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (listener != null) {
+            listener.onCastClicked();
+        }
+    }
+
+    public interface OnControlClickedListener {
+        void onCastClicked();
     }
 }

@@ -29,9 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp" />
     
-    <com.xoul.ru.magone.view.player.control.CastButton
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"/>
+    <com.xoul.ru.magone.view.player.control.ControlField
+        android:id="@+id/controlField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -29,7 +29,9 @@ public class RuneField extends LinearLayout implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Rune rune = (Rune) v;
-        listener.onRuneClicked(rune.getStyle());
+        if (listener != null) {
+            listener.onRuneClicked(rune.getStyle());
+        }
     }
 
     public interface OnRuneClickedListener {
