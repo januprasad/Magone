@@ -2,6 +2,7 @@ package com.xoul.ru.magone.model;
 
 import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.Subject;
+import com.xoul.ru.magone.model.spells.Spell;
 
 public class GameModel implements Subject {
     Observer view;
@@ -26,7 +27,10 @@ public class GameModel implements Subject {
     }
 
     public void castASpell() {
-        currentPlayer.setSpell(currentPlayer.createSpell(),getEnemy());
+        Spell sp = currentPlayer.createSpell();
+        if(currentPlayer.getMp() >= sp.manaAmountToCut)
+        currentPlayer.setSpell(sp,getEnemy());
+        currentPlayer.clearCurrenSpell();
     }
 
     public static PlayerModel getCurrentPlayer() {

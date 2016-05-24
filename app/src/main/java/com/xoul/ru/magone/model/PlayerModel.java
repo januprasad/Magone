@@ -20,6 +20,10 @@ public class PlayerModel {
         return hero.getCurrenthp();
     }
 
+    public int getMp() {
+        return mp;
+    }
+
     //Приводит в действие переданное заклинание, проверяя его тип и изменяя в соответсвии с имющимися эффектами
     public void setSpell(Spell spell,PlayerModel enemy) {
         if (spell.spellType == SpellType.Damage) {
@@ -45,6 +49,7 @@ public class PlayerModel {
         }
         //вешаем эффект
         if (spell.isSettingEffect() && spell.effectType!=null) addEffect(spell.effectType);
+        mp-=spell.manaAmountToCut;
 
     }
 
