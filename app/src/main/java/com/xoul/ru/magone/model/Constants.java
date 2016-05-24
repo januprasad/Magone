@@ -2,6 +2,9 @@ package com.xoul.ru.magone.model;
 
 public class Constants {
     public static final int BURNINGTIME = 5;
+    public static final int HEALTIME = 5;
+    public static final int DEATHTIME = 5;
+    public static final int WETTIME = 5;
     public static final int SMALLFIREDAMAGE = 5;
     public static final int MIDDLEFIREDAMAGE = 10;
     public static final int BIGFIREDAMAGE = 15;

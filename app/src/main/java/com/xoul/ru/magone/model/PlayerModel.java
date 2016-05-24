@@ -1,6 +1,7 @@
 package com.xoul.ru.magone.model;
 
 import com.xoul.ru.magone.model.effects.BurningEffect;
+import com.xoul.ru.magone.model.effects.DeathEffect;
 import com.xoul.ru.magone.model.spells.Spell;
 import com.xoul.ru.magone.model.spells.SpellFactory;
 import com.xoul.ru.magone.model.spells.SpellType;
@@ -43,7 +44,7 @@ public class PlayerModel {
 
         }
         //вешаем эффект
-        if (spell.isSettingEffect()) addEffect(spell.effectType);
+        if (spell.isSettingEffect() && spell.effectType!=null) addEffect(spell.effectType);
 
     }
 
@@ -66,7 +67,16 @@ public class PlayerModel {
     public void addEffect(EffectType effectType) {
         Effect effect = null;
         if (effectType == EffectType.FIRE) {
-            effect = new BurningEffect(Constants.BURNINGTIME, true, effectType);
+            effect = new BurningEffect(Constants.BURNINGTIME, true, effectType,0,2);
+        }
+        if (effectType == EffectType.DEATH) {
+            effect = new DeathEffect(Constants.DEATHTIME, true, effectType,0,2);
+        }
+        if (effectType == EffectType.HEAL) {
+            effect = new BurningEffect(Constants.HEALTIME, true, effectType,2,0);
+        }
+        if (effectType == EffectType.WET) {
+            effect = new BurningEffect(Constants.WETTIME, true, effectType,0,0);
         }
         for (Effect eff : currentEffects) {
             if (eff.type == EffectType.FIRE)
@@ -89,9 +99,9 @@ public class PlayerModel {
     }
 
     //для каждого эффекта из текущих вызывает метод оповещающий эффекты о конце текущего хода
-    public void endOfTurn() {
+    public void endOfTurn(PlayerModel currentPlayer) {
         for (Effect eff : currentEffects) {
-            eff.endOfTurn();
+            eff.endOfTurn(currentPlayer);
         }
     }
 
@@ -99,5 +109,10 @@ public class PlayerModel {
     public Spell createSpell() {
         spell = SpellFactory.create(currentSpell);
         return spell;
+    }
+
+    public void endTurnEffect(int heal , int damage) {
+        heal(new Heal(heal));
+        damage(new Damage(damage,null));
     }
 }

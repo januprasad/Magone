@@ -7,8 +7,8 @@ import com.xoul.ru.magone.model.EffectType;
 public class BurningEffect extends Effect {
 
 
-    public BurningEffect(int timeleft, boolean available, EffectType type) {
-        super(timeleft, available, type);
+    public BurningEffect(int timeleft, boolean available, EffectType type, int healAmmount, int damageAmmount) {
+        super(timeleft, available, type, healAmmount, damageAmmount);
     }
 
     @Override

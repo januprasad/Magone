@@ -16,7 +16,7 @@ public class GameModel implements Subject {
 
     public void endOfTurn() {
         currentPlayer.clearCurrenSpell();
-        currentPlayer.endOfTurn();
+        currentPlayer.endOfTurn(currentPlayer);
         currentPlayer.clearEffects();
         if (currentPlayer == player1)
             currentPlayer = player2;

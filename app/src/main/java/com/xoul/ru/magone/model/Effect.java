@@ -4,11 +4,15 @@ public abstract class Effect {
     private int timeleft;
     private boolean available;
     public EffectType type;
+    private int healAmmount;
+    private  int damageAmmount;
 
-    public Effect(int timeleft, boolean available,EffectType type) {
+    public Effect(int timeleft, boolean available, EffectType type, int healAmmount, int damageAmmount) {
         this.timeleft = timeleft;
         this.available = available;
         this.type = type;
+        this.healAmmount = healAmmount;
+        this.damageAmmount = damageAmmount;
     }
 
     public Damage damage(Damage damage) {
@@ -27,11 +31,12 @@ public abstract class Effect {
         return available;
     }
 
-    public void endOfTurn() {
+    public void endOfTurn(PlayerModel currentPlayer) {
         timeleft--;
         if (timeleft < 1) {
             unavailable();
         }
+        currentPlayer.endTurnEffect(healAmmount,damageAmmount);
     }
 
     private void unavailable(){
