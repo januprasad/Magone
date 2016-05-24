@@ -16,7 +16,6 @@ public class PlayerField extends LinearLayout {
     PlayerInfoField playerInfoField;
     RuneField runeField;
     ControlField controlField;
-    private boolean reversed;
 
     public PlayerField(Context context) {
         super(context);
