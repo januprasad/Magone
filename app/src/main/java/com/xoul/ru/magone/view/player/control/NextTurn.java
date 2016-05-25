@@ -2,6 +2,7 @@ package com.xoul.ru.magone.view.player.control;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -20,7 +21,7 @@ public class NextTurn extends View {
 
     private Path outsidePath;
     private Rect outsideRect;
-    private RectF tmp;
+    private Matrix tmp;
     private Path insidePath;
     private Rect insideRect;
     private Rect bounds;
@@ -39,10 +40,10 @@ public class NextTurn extends View {
     }
 
     private void init() {
-        text = "⇨";
+        text = "✔";
         outsidePath = new Path();
         outsideRect = new Rect();
-        tmp = new RectF();
+        tmp = new Matrix();
         insidePath = new Path();
         insideRect = new Rect();
         bounds = new Rect(0, 0, 0, 0);
@@ -57,23 +58,16 @@ public class NextTurn extends View {
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
         outsideRect.set(0, 0, w, h);
-        tmp.set(0, 0, w, h / 2);
-        outsidePath.addArc(tmp, 0, 0);
-        tmp.set(w, h / 2, 0, h);
-        outsidePath.addArc(tmp, 0, 0);
-        tmp.set(0, h, 0, 0);
-        outsidePath.addArc(tmp, 0, 0);
+        outsidePath.reset();
+        outsidePath.lineTo(w, h / 2);
+        outsidePath.lineTo(0, h);
+        outsidePath.close();
 
         int border = (w < h) ? w : h; // min(w, h);
         border *= borderMultiplier;
         insideRect.set(border, border, w - border, h - border);
-        tmp.set(border, border, w - border, h / 2 - border);
-        outsidePath.addArc(tmp, 0, 0);
-        tmp.set(w - border, h / 2 - border, border, h - border);
-        outsidePath.addArc(tmp, 0, 0);
-        tmp.set(border, h - border, border, border);
-        outsidePath.addArc(tmp, 0, 0);
-        //insideRect.set(border, border, w - border, h - border);
+        tmp.setScale(0.5f, 0.5f, w / 2, h / 2);
+        outsidePath.transform(tmp, insidePath);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -85,7 +79,7 @@ public class NextTurn extends View {
         canvas.drawPath(insidePath, paint);
         paint.setColor(textColor);
         makeTextMeasurements();
-        canvas.drawText(text, outsideRect.centerX(), outsideRect.centerY() - bounds.centerY(), paint);
+        canvas.drawText(text, outsideRect.right / 3, outsideRect.centerY() - bounds.centerY(), paint);
     }
 
     private void makeTextMeasurements() {

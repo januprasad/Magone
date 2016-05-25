@@ -12,7 +12,7 @@
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-<!--
+
     <com.xoul.ru.magone.view.player.PlayerField
         android:id="@+id/playerField"
         android:layout_width="match_parent"
@@ -24,9 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
--->
+
     <com.xoul.ru.magone.view.player.control.NextTurn
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="50dp" />
 
 </RelativeLayout>
