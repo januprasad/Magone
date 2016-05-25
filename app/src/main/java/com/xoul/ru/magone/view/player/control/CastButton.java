@@ -77,6 +77,8 @@ public class CastButton extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
@@ -89,6 +91,11 @@ public class CastButton extends View {
                     performClick();
                 }
                 setPressed(false);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (isPressed() && !outsideRect.contains(x, y)) {
+                    setPressed(false);
+                }
                 break;
         }
         return true;

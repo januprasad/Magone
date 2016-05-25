@@ -19,10 +19,7 @@ public class NextTurn extends View {
     protected int textColor = 0xff000000;
     protected float textSize = 70f;
 
-    private Path outsidePath;
     private Rect outsideRect;
-    private Matrix tmp;
-    private Path insidePath;
     private Rect insideRect;
     private Rect bounds;
     private Paint paint;
@@ -41,10 +38,7 @@ public class NextTurn extends View {
 
     private void init() {
         text = "✔";
-        outsidePath = new Path();
         outsideRect = new Rect();
-        tmp = new Matrix();
-        insidePath = new Path();
         insideRect = new Rect();
         bounds = new Rect(0, 0, 0, 0);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -58,28 +52,25 @@ public class NextTurn extends View {
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
         outsideRect.set(0, 0, w, h);
-        outsidePath.reset();
-        outsidePath.lineTo(w, h / 2);
-        outsidePath.lineTo(0, h);
-        outsidePath.close();
-
         int border = (w < h) ? w : h; // min(w, h);
         border *= borderMultiplier;
         insideRect.set(border, border, w - border, h - border);
-        tmp.setScale(0.5f, 0.5f, w / 2, h / 2);
-        outsidePath.transform(tmp, insidePath);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         paint.setColor(borderColor);
-        canvas.drawPath(outsidePath, paint);
-        paint.setColor(color);
-        canvas.drawPath(insidePath, paint);
+        canvas.drawRect(outsideRect, paint);
+        if (isPressed()) {
+            paint.setColor(borderColor);
+        } else {
+            paint.setColor(color);
+        }
+        canvas.drawRect(insideRect, paint);
         paint.setColor(textColor);
         makeTextMeasurements();
-        canvas.drawText(text, outsideRect.right / 3, outsideRect.centerY() - bounds.centerY(), paint);
+        canvas.drawText(text, outsideRect.centerX(), outsideRect.centerY() - bounds.centerY(), paint);
     }
 
     private void makeTextMeasurements() {
@@ -89,6 +80,8 @@ public class NextTurn extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
@@ -101,6 +94,11 @@ public class NextTurn extends View {
                     performClick();
                 }
                 setPressed(false);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (isPressed() && !outsideRect.contains(x, y)) {
+                    setPressed(false);
+                }
                 break;
         }
         return true;

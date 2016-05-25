@@ -2,15 +2,15 @@ package com.xoul.ru.magone.view.player.control;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.xoul.ru.magone.view.other.Utils;
 
-public class ControlField extends LinearLayout implements View.OnClickListener {
+public class ControlField extends RelativeLayout implements View.OnClickListener {
     private LayoutParams params;
     private CastButton castButton;
+    private NextTurn nextTurn;
 
     private OnControlClickedListener listener;
 
@@ -25,12 +25,16 @@ public class ControlField extends LinearLayout implements View.OnClickListener {
     }
 
     private void initViews(Context context) {
-        setOrientation(VERTICAL);
-        setGravity(Gravity.CENTER);
         params = new LayoutParams(Utils.dpPx(context, 200), Utils.dpPx(context, 50));
+        params.addRule(CENTER_IN_PARENT);
         castButton = new CastButton(context);
         castButton.setOnClickListener(this);
         addView(castButton, params);
+        params = new LayoutParams(Utils.dpPx(context, 50), Utils.dpPx(context, 50));
+        params.addRule(ALIGN_PARENT_RIGHT);
+        nextTurn = new NextTurn(context);
+        nextTurn.setOnClickListener(this);
+        addView(nextTurn, params);
     }
 
     public void setOnControlClickedListener(OnControlClickedListener listener) {
@@ -40,11 +44,16 @@ public class ControlField extends LinearLayout implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (listener != null) {
-            listener.onCastClicked();
+            if (v == castButton) {
+                listener.onCastClicked();
+            } else if (v == nextTurn) {
+                listener.onNextTurnClicked();
+            }
         }
     }
 
     public interface OnControlClickedListener {
         void onCastClicked();
+        void onNextTurnClicked();
     }
 }

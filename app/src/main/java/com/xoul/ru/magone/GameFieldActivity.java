@@ -19,9 +19,9 @@ public class GameFieldActivity extends Activity implements OnRuneClickedListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
-//        playerField = (PlayerField) findViewById(R.id.playerField);
-//        playerField.getRuneField().setOnRuneClickedListener(this);
-//        playerField.getControlField().setOnControlClickedListener(this);
+        playerField = (PlayerField) findViewById(R.id.playerField);
+        playerField.getRuneField().setOnRuneClickedListener(this);
+        playerField.getControlField().setOnControlClickedListener(this);
     }
 
     @Override
@@ -53,5 +53,10 @@ public class GameFieldActivity extends Activity implements OnRuneClickedListener
     @Override
     public void onCastClicked() {
         Toast.makeText(getApplicationContext(), "CAST!!!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNextTurnClicked() {
+
     }
 }
