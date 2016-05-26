@@ -1,64 +1,68 @@
 package com.xoul.ru.magone.model;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
 
 public class PlayerModelTest {
 
-    @org.junit.Test
+    GameModel gm = new GameModel();
+    @Test
     public void testGetHp() throws Exception {
+      assertEquals("Прийденное хп не соответсвует",50,gm.getPlayer1().getHp());
     }
 
-    @org.junit.Test
+    @Test
     public void testGetMp() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testSetSpell() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testDamage() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testHeal() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testAddRuneToCurrenSpell() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testAddEffect() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testClearCurrenSpell() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testClearEffects() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testEndOfTurn() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testCreateSpell() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testEndTurnEffect() throws Exception {
 
     }

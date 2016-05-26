@@ -5,13 +5,12 @@ import com.xoul.ru.magone.Subject;
 import com.xoul.ru.magone.model.spells.Spell;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class GameModel implements Subject {
     Observer view;
-    private static PlayerModel currentPlayer;
-    private static PlayerModel player1;
-    private static PlayerModel player2;
+    private  PlayerModel currentPlayer;
+    private  PlayerModel player1;
+    private  PlayerModel player2;
 
     public void Model() {
         player1 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
@@ -37,16 +36,24 @@ public class GameModel implements Subject {
         currentPlayer.clearCurrenSpell();
     }
 
-    public static PlayerModel getCurrentPlayer() {
+    public  PlayerModel getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public static PlayerModel getEnemy() {
+    public  PlayerModel getEnemy() {
         if (player1 == currentPlayer) {
             return player2;
         } else {
             return player1;
         }
+    }
+
+    public  PlayerModel getPlayer1() {
+        return player1;
+    }
+
+    public  PlayerModel getPlayer2() {
+        return player2;
     }
 
     @Override

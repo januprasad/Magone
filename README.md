@@ -1,2 +1,2 @@
 # Magone
-Small and simple Android game project. Without any engine and graphics.
+Small and simple Android game project. Without engine and with simple graphics.
