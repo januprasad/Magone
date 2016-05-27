@@ -13,7 +13,7 @@ public class PlayerModel {
     private int mp;
     private int maxSpellLength;
     public List<Effect> currentEffects;
-    private List<Rune> currentSpell;
+    public List<Rune> currentSpell;
     private Spell spell;
 
     public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects) {

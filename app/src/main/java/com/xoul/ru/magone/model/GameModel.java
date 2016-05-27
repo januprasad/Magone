@@ -8,9 +8,9 @@ import java.util.LinkedList;
 
 public class GameModel implements Subject {
     Observer view;
-    private  PlayerModel currentPlayer;
-    private  PlayerModel player1;
-    private  PlayerModel player2;
+    private static PlayerModel currentPlayer;
+    private static  PlayerModel player1;
+    private static  PlayerModel player2;
 
     public void Model() {
         player1 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
@@ -36,11 +36,11 @@ public class GameModel implements Subject {
         currentPlayer.clearCurrenSpell();
     }
 
-    public  PlayerModel getCurrentPlayer() {
+    public static PlayerModel getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public  PlayerModel getEnemy() {
+    public static PlayerModel getEnemy() {
         if (player1 == currentPlayer) {
             return player2;
         } else {
@@ -48,11 +48,11 @@ public class GameModel implements Subject {
         }
     }
 
-    public  PlayerModel getPlayer1() {
+    public static  PlayerModel getPlayer1() {
         return player1;
     }
 
-    public  PlayerModel getPlayer2() {
+    public static  PlayerModel getPlayer2() {
         return player2;
     }
 
