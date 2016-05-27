@@ -15,12 +15,14 @@ public class PlayerModel {
     public List<Effect> currentEffects;
     public List<Rune> currentSpell;
     private Spell spell;
+    private SpellFactory sp;
 
-    public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects) {
+    public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects, SpellFactory sp) {
         this.hero = hero;
         this.mp = mp;
         this.currentSpell = currentSpell;
         this.currentEffects = currentEffects;
+        this.sp = sp;
     }
 
     public int getHp() {
@@ -81,7 +83,7 @@ public class PlayerModel {
         if (effectType == EffectType.FIRE) {
             effect = new BurningEffect(Constants.BURNINGTIME, true, effectType,0,2);
         }
-        if (effectType == EffectType.DEATH) {
+        if (effectType.equals(EffectType.DEATH)) {
             effect = new DeathEffect(Constants.DEATHTIME, true, effectType,0,2);
         }
         if (effectType == EffectType.HEAL) {
@@ -119,7 +121,8 @@ public class PlayerModel {
 
     //собирает заклинание из уже переданных
     public Spell createSpell() {
-        spell = SpellFactory.create(currentSpell);
+        spell = sp.create(currentSpell);
+        if(spell == null) System.out.println("shit");
         return spell;
     }
 

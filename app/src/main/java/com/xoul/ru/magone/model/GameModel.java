@@ -3,19 +3,27 @@ package com.xoul.ru.magone.model;
 import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.Subject;
 import com.xoul.ru.magone.model.spells.Spell;
+import com.xoul.ru.magone.model.spells.SpellFactory;
 
 import java.util.LinkedList;
 
 public class GameModel implements Subject {
     Observer view;
-    private static PlayerModel currentPlayer;
-    private static  PlayerModel player1;
-    private static  PlayerModel player2;
+    private PlayerModel currentPlayer;
+    private PlayerModel player1;
+    private PlayerModel player2;
+    private SpellFactory sp;
 
-    public void Model() {
-        player1 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
-        player2 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
+    public SpellFactory getSp() {
+        return sp;
+    }
+
+    public  GameModel() {
+        player1 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>(),sp);
+        player2 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>(),sp);
         currentPlayer = player1;
+        sp = new SpellFactory(this);
+
     }
 
     public void endOfTurn() {
@@ -31,16 +39,16 @@ public class GameModel implements Subject {
 
     public void castASpell() {
         Spell sp = currentPlayer.createSpell();
-        if(currentPlayer.getMp() >= sp.manaAmountToCut)
-        currentPlayer.setSpell(sp,getEnemy());
+        if (currentPlayer.getMp() >= sp.manaAmountToCut)
+            currentPlayer.setSpell(sp, getEnemy());
         currentPlayer.clearCurrenSpell();
     }
 
-    public static PlayerModel getCurrentPlayer() {
+    public PlayerModel getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public static PlayerModel getEnemy() {
+    public PlayerModel getEnemy() {
         if (player1 == currentPlayer) {
             return player2;
         } else {
@@ -48,11 +56,11 @@ public class GameModel implements Subject {
         }
     }
 
-    public static  PlayerModel getPlayer1() {
+    public PlayerModel getPlayer1() {
         return player1;
     }
 
-    public static  PlayerModel getPlayer2() {
+    public PlayerModel getPlayer2() {
         return player2;
     }
 

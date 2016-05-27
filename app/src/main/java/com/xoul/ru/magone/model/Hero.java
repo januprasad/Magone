@@ -15,10 +15,12 @@ public class Hero {
     }
 
     public void damage(Damage damage) {
+        if(damage.damage>0)
         currenthp -= damage.damage;
     }
 
     public void heal(Heal heal) {
+        if(heal.heal>0)
         currenthp += heal.heal;
         if (currenthp > MAXHP) currenthp = MAXHP;
     }

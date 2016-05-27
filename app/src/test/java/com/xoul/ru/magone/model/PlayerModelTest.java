@@ -10,6 +10,7 @@ public class PlayerModelTest {
 
     GameModel gm = new GameModel();
 
+
     @Test
     public void testGetHp() throws Exception {
         assertEquals("Полученное хп не верно", 50, gm.getPlayer1().getHp());
@@ -27,19 +28,19 @@ public class PlayerModelTest {
         gm.getPlayer1().addRuneToCurrenSpell(Rune.FIRE);
         gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
         hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании огня", hp - Constants.SMALLFIREDAMAGE, GameModel.getPlayer2().getHp());
+        assertEquals("Тест валится на заклинании огня", hp - Constants.SMALLFIREDAMAGE, gm.getPlayer2().getHp());
         gm.getPlayer1().addRuneToCurrenSpell(Rune.DEATH);
         gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
         hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании смерти", hp - Constants.SMALLDEATHAMMOUNT, GameModel.getPlayer2().getHp());
+        assertEquals("Тест валится на заклинании смерти", hp - Constants.SMALLDEATHAMMOUNT, gm.getPlayer2().getHp());
         gm.getPlayer1().addRuneToCurrenSpell(Rune.WATER);
         gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
         hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании водицы", hp - Constants.SMALLWATERAMMOUNT, GameModel.getPlayer2().getHp());
+        assertEquals("Тест валится на заклинании водицы", hp - Constants.SMALLWATERAMMOUNT, gm.getPlayer2().getHp());
         gm.getPlayer1().addRuneToCurrenSpell(Rune.lIFE);
         gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
         hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, GameModel.getPlayer2().getHp());
+        assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, gm.getPlayer2().getHp());
     }
 
     @Test
@@ -59,7 +60,7 @@ public class PlayerModelTest {
     public void testHeal() throws Exception {
         int hp = gm.getPlayer1().getHp();
         gm.getPlayer1().heal(new Heal(3));
-        assertEquals("Что то не так с хилом", hp + 3, gm.getPlayer1().getHp());
+        assertEquals("Что то не так с хилом", hp, gm.getPlayer1().getHp());
         gm.getPlayer1().heal(new Heal(300));
         assertEquals("Что то не так с хилом", 50, gm.getPlayer1().getHp());
         gm.getPlayer1().heal(new Heal(-300));
