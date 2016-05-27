@@ -20,14 +20,10 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:rotation="180" />
-<!--
+
     <com.xoul.ru.magone.view.player.PlayerField
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5" /> -->
-
-    <com.xoul.ru.magone.view.player.control.SpellField
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_weight="0.5" />
 
 </LinearLayout>

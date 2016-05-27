@@ -32,19 +32,23 @@ public class SpellField extends LinearLayout {
         setGravity(Gravity.CENTER);
         params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         int margin = Utils.dpPx(getContext(), MARGIN_DP);
-        params.setMargins(margin, margin, margin, margin);
+        params.setMargins(margin / 2, 0, margin / 2, 0);
 
         runes = new LinkedList<>();
-        addRune(Rune.RuneStyle.FIRE);
-        addRune(Rune.RuneStyle.WATER);
-        addRune(Rune.RuneStyle.LIFE);
-        addRune(Rune.RuneStyle.DEATH);
     }
 
     public void addRune(Rune.RuneStyle style) {
         SpellRune rune = new SpellRune(getContext(), style);
         runes.add(rune);
         addView(rune, params);
+    }
+
+    public List<Rune.RuneStyle> getRunes() {
+        List<Rune.RuneStyle> runes = new LinkedList<>();
+        for (SpellRune rune : this.runes) {
+            runes.add(rune.getStyle());
+        }
+        return runes;
     }
 
     public void clear() {

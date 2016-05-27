@@ -26,7 +26,7 @@ public class SpellRune extends View {
     public SpellRune(Context context, RuneStyle style) {
         super(context);
         this.style = style;
-        paint = new Paint();
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     public SpellRune(Context context, AttributeSet attrs) {
@@ -34,7 +34,11 @@ public class SpellRune extends View {
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Rune, 0, 0);
         int runeIndex = typedArray.getInteger(R.styleable.Rune_type, 0);
         this.style = RuneStyle.values()[runeIndex];
-        paint = new Paint();
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    }
+
+    public RuneStyle getStyle() {
+        return style;
     }
 
     @Override
