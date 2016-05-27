@@ -12,7 +12,7 @@ public class GameModel implements Subject {
     private static  PlayerModel player1;
     private static  PlayerModel player2;
 
-    public void Model() {
+    static {
         player1 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
         player2 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
         currentPlayer = player1;
