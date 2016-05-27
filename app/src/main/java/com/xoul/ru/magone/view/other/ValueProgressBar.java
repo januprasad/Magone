@@ -18,7 +18,7 @@ public class ValueProgressBar extends View implements ValueAnimator.AnimatorUpda
     protected int backgroundColor = 0xff111111;
     protected int color = 0xff0000ff;
     protected int textColor = 0xffffffff;
-    protected float textSize = 50f;
+    protected float textSize;
     protected long animationDuration = 250;
 
     private Rect outsideRect;
@@ -60,7 +60,6 @@ public class ValueProgressBar extends View implements ValueAnimator.AnimatorUpda
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setTypeface(Typeface.create("Roboto", Typeface.NORMAL));
         paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(textSize);
     }
 
     public int getValue() {
@@ -96,6 +95,8 @@ public class ValueProgressBar extends View implements ValueAnimator.AnimatorUpda
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
         outsideRect.set(0, 0, w, h);
+        textSize = h;
+        paint.setTextSize(textSize);
         int border = (w < h) ? w : h; // min(w, h);
         border *= borderMultiplier;
         insideRect.set(border, border, w - border, h - border);

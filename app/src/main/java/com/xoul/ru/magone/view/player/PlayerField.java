@@ -33,22 +33,23 @@ public class PlayerField extends LinearLayout {
         setOrientation(VERTICAL);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 Utils.dpPx(context, 125));
+        params.weight = 1;
         //params.setMargins(MARGIN_DP, MARGIN_DP, MARGIN_DP, MARGIN_DP / 2);
         unitField = new UnitField(context);
         addView(unitField, params);
 
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dpPx(context, 25));
-        params.setMargins(MARGIN_DP, MARGIN_DP / 2, MARGIN_DP, MARGIN_DP / 2);
+        params.setMargins(MARGIN_DP, 0, MARGIN_DP, MARGIN_DP );
         playerInfoField = new PlayerInfoField(context);
         addView(playerInfoField, params);
 
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dpPx(context, 50));
-        params.setMargins(MARGIN_DP, MARGIN_DP / 2, MARGIN_DP, MARGIN_DP /2);
+        params.setMargins(MARGIN_DP, 0, MARGIN_DP, MARGIN_DP);
         runeField = new RuneField(context);
         addView(runeField, params);
 
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(MARGIN_DP, MARGIN_DP / 2, MARGIN_DP, MARGIN_DP);
+        params.setMargins(MARGIN_DP, 0, MARGIN_DP, MARGIN_DP);
         controlField = new ControlField(context);
         addView(controlField, params);
     }

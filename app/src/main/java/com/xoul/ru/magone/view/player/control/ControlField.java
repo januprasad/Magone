@@ -25,7 +25,7 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
     }
 
     private void initViews(Context context) {
-        params = new LayoutParams(Utils.dpPx(context, 200), Utils.dpPx(context, 50));
+        params = new LayoutParams(Utils.dpPx(context, 175), Utils.dpPx(context, 50));
         params.addRule(CENTER_IN_PARENT);
         castButton = new CastButton(context);
         castButton.setOnClickListener(this);

@@ -1,10 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#0099cc"
-    tools:context=".GameFieldActivity">
+    tools:context=".GameFieldActivity"
+    android:weightSum="1">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
@@ -16,13 +17,13 @@
     <com.xoul.ru.magone.view.player.PlayerField
         android:id="@+id/playerField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
         android:rotation="180" />
 
     <com.xoul.ru.magone.view.player.PlayerField
-        android:id="@+id/playerField2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_height="0dp"
+        android:layout_weight="0.5" />
 
-</RelativeLayout>
+</LinearLayout>

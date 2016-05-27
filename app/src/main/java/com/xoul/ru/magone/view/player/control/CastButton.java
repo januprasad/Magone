@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.xoul.ru.magone.view.other.Utils;
+
 public class CastButton extends View {
     protected float borderMultiplier = 1 / 10f;
     protected int borderColor = 0xffe0e0e0;
@@ -41,7 +43,6 @@ public class CastButton extends View {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setTypeface(Typeface.create("Roboto", Typeface.NORMAL));
         paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(textSize);
     }
 
     @Override
@@ -49,6 +50,12 @@ public class CastButton extends View {
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
         outsideRect.set(0, 0, w, h);
+        textSize = h * 9 / 10;
+        int maxTextSize = Utils.dpPx(getContext(), 32);
+        if (textSize > maxTextSize) {
+            textSize = maxTextSize;
+        }
+        paint.setTextSize(textSize);
         int border = (w < h) ? w : h; // min(w, h);
         border *= borderMultiplier;
         insideRect.set(border, border, w - border, h - border);

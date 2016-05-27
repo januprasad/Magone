@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 import com.xoul.ru.magone.view.other.Utils;
 
 public class UnitField extends LinearLayout {
-    private static final int UNIT_WIDTH_DP = 75;
     private static final int UNIT_MARGIN_DP = 5;
+    private int unitWidthPx;
     private LayoutParams layoutParams;
 
     private Unit[] units;
@@ -32,10 +32,18 @@ public class UnitField extends LinearLayout {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
 
-        int width = Utils.dpPx(getContext(), UNIT_WIDTH_DP);
         int margin = Utils.dpPx(getContext(), UNIT_MARGIN_DP);
-        layoutParams = new LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams = new LayoutParams(unitWidthPx, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(margin, margin, margin, margin);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int w = MeasureSpec.getSize(widthMeasureSpec);
+        int h = MeasureSpec.getSize(heightMeasureSpec);
+        unitWidthPx = (int) (h / 1.5);
+        layoutParams.width = unitWidthPx;
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     private void initUnits(Context context) {
