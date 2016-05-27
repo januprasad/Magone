@@ -36,7 +36,7 @@ public class PlayerModelTest {
         gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
         hp = gm.getPlayer2().getHp();
         assertEquals("Тест валится на заклинании водицы", hp - Constants.SMALLWATERAMMOUNT, GameModel.getPlayer2().getHp());
-        gm.getPlayer1().addRuneToCurrenSpell(Rune.lIFE);
+        gm.getPlayer1().addRuneToCurrenSpell(Rune.LIFE);
         gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
         hp = gm.getPlayer2().getHp();
         assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, GameModel.getPlayer2().getHp());
