@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ControlField extends RelativeLayout implements View.OnClickListener {
     private LayoutParams params;
+    private ClearButton clearButton;
     private CastSpellButton castSpellButton;
     private NextTurn nextTurn;
 
@@ -28,6 +29,11 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
     }
 
     private void initViews(Context context) {
+        params = new LayoutParams(Utils.dpPx(context, 50), Utils.dpPx(context, 50));
+        params.addRule(ALIGN_PARENT_LEFT);
+        clearButton = new ClearButton(context);
+        clearButton.setOnClickListener(this);
+        addView(clearButton, params);
         params = new LayoutParams(Utils.dpPx(context, 175), Utils.dpPx(context, 50));
         params.addRule(CENTER_IN_PARENT);
         castSpellButton = new CastSpellButton(context);
@@ -61,6 +67,8 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
         if (listener != null) {
             if (v == nextTurn) {
                 listener.onNextTurnClicked();
+            } else if (v == clearButton) {
+                clear();
             } else {
                 listener.onCastClicked();
             }
