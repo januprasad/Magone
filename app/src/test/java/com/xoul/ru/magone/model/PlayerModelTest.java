@@ -29,34 +29,7 @@ public class PlayerModelTest {
 
     }
 
-    @Test
-    public void testSetSpell() throws Exception {
-        int hp;
-        pl1.addRuneToCurrenSpell(Rune.FIRE);
-        hp = pl2.getHp();
-        pl1.setSpell(pl1.createSpell());
-        assertEquals("Тест валится на заклинании огня", hp - Constants.SMALLFIREDAMAGE, pl2.getHp());
-        pl2.currentEffects.clear();
 
-        pl1.addRuneToCurrenSpell(Rune.DEATH);
-        hp = pl2.getHp();
-        pl1.setSpell(pl1.createSpell());
-        assertEquals("Тест валится на заклинании смерти", hp - Constants.SMALLDEATHAMMOUNT, pl2.getHp());
-        pl2.currentEffects.clear();
-
-        pl1.addRuneToCurrenSpell(Rune.WATER);
-        hp = pl2.getHp();
-        pl1.setSpell(pl1.createSpell());
-        assertEquals("Тест валится на заклинании водицы", hp - Constants.SMALLWATERAMMOUNT, pl2.getHp());
-        pl2.currentEffects.clear();
-
-        pl1.addRuneToCurrenSpell(Rune.LIFE);
-        pl1.currentEffects.clear();
-        hp = pl1.getHp();
-        pl1.setSpell(pl1.createSpell());
-        assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, pl1.getHp());
-        pl1.currentEffects.clear();
-    }
 
     @Test
     public void testDamage() throws Exception {
