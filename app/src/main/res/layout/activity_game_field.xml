@@ -15,13 +15,14 @@
          android:fitsSystemWindows. -->
 
     <com.xoul.ru.magone.view.player.PlayerField
-        android:id="@+id/playerField"
+        android:id="@+id/playerField2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:rotation="180" />
 
     <com.xoul.ru.magone.view.player.PlayerField
+        android:id="@+id/playerField1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5" />

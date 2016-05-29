@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.xoul.ru.magone.model.Rune;
 import com.xoul.ru.magone.view.player.PlayerField;
 import com.xoul.ru.magone.view.player.PlayerListener;
-import com.xoul.ru.magone.model.Rune;
-import com.xoul.ru.magone.view.player.unit.Unit;
-import com.xoul.ru.magone.view.player.unit.UnitField;
 
 import java.util.List;
 
@@ -18,9 +16,10 @@ public class GameFieldActivity extends Activity implements PlayerListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
-        PlayerField playerField = (PlayerField) findViewById(R.id.playerField);
-        playerField.setListener(this);
-        playerField.getUnitField().addUnit(new Unit(this), UnitField.Slot.HERO);
+        PlayerField playerField1 = (PlayerField) findViewById(R.id.playerField1);
+        playerField1.setListener(this);
+        PlayerField playerField2 = (PlayerField) findViewById(R.id.playerField2);
+        playerField2.setListener(this);
     }
 
     @Override
