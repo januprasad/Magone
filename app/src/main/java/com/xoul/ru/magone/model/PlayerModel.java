@@ -33,7 +33,6 @@ public class PlayerModel {
 
     //Приводит в действие переданное заклинание, проверяя его тип и изменяя в соответсвии с имющимися эффектами
     public void setSpell(Spell spell) {
-        if (spell.manaAmountToCut <= mp) {
             if (spell.spellType == SpellType.Damage) {
                 if (!spell.target.currentEffects.isEmpty())
                     for (Effect eff : spell.target.currentEffects) {
@@ -55,7 +54,7 @@ public class PlayerModel {
             }
             if (spell.spellType == SpellType.Buff) {
 
-            }
+
             //вешаем эффект
             if (spell.isSettingEffect() && spell.effectType != null) spell.target.addEffect(spell.effectType);
             mp-=spell.manaAmountToCut;
@@ -122,7 +121,6 @@ public class PlayerModel {
     //собирает заклинание из уже переданных
     public Spell createSpell() {
         spell = SpellFactory.create(currentSpell);
-        clearCurrenSpell();
         return spell;
     }
 
