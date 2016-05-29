@@ -1,75 +1,93 @@
 package com.xoul.ru.magone.model;
 
-import com.xoul.ru.magone.model.effects.DeathEffect;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 public class PlayerModelTest {
+    GameModel gm;
+    PlayerModel pl1;
+    PlayerModel pl2;
 
-    GameModel gm = new GameModel();
+    @Before
+    public void init() {
+        gm = new GameModel();
+        pl1 = gm.getPlayer1();
+        pl2 = gm.getPlayer2();
+    }
 
     @Test
     public void testGetHp() throws Exception {
-        assertEquals("Полученное хп не верно", 50, gm.getPlayer1().getHp());
+        assertEquals("Полученное хп не верно", 50, pl1.getHp());
     }
 
     @Test
     public void testGetMp() throws Exception {
-        assertEquals("Полученное mp не верно", 2, gm.getPlayer1().getMp());
+        assertEquals("Полученное mp не верно", 10, pl1.getMp());
 
     }
 
     @Test
     public void testSetSpell() throws Exception {
         int hp;
-        gm.getPlayer1().addRuneToCurrenSpell(Rune.FIRE);
-        gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
-        hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании огня", hp - Constants.SMALLFIREDAMAGE, GameModel.getPlayer2().getHp());
-        gm.getPlayer1().addRuneToCurrenSpell(Rune.DEATH);
-        gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
-        hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании смерти", hp - Constants.SMALLDEATHAMMOUNT, GameModel.getPlayer2().getHp());
-        gm.getPlayer1().addRuneToCurrenSpell(Rune.WATER);
-        gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
-        hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании водицы", hp - Constants.SMALLWATERAMMOUNT, GameModel.getPlayer2().getHp());
-        gm.getPlayer1().addRuneToCurrenSpell(Rune.LIFE);
-        gm.getPlayer1().setSpell(gm.getPlayer1().createSpell(), gm.getPlayer2());
-        hp = gm.getPlayer2().getHp();
-        assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, GameModel.getPlayer2().getHp());
+        pl1.addRuneToCurrenSpell(Rune.FIRE);
+        hp = pl2.getHp();
+        pl1.setSpell(pl1.createSpell());
+        assertEquals("Тест валится на заклинании огня", hp - Constants.SMALLFIREDAMAGE, pl2.getHp());
+        pl2.currentEffects.clear();
+
+        pl1.addRuneToCurrenSpell(Rune.DEATH);
+        hp = pl2.getHp();
+        pl1.setSpell(pl1.createSpell());
+        assertEquals("Тест валится на заклинании смерти", hp - Constants.SMALLDEATHAMMOUNT, pl2.getHp());
+        pl2.currentEffects.clear();
+
+        pl1.addRuneToCurrenSpell(Rune.WATER);
+        hp = pl2.getHp();
+        pl1.setSpell(pl1.createSpell());
+        assertEquals("Тест валится на заклинании водицы", hp - Constants.SMALLWATERAMMOUNT, pl2.getHp());
+        pl2.currentEffects.clear();
+
+        pl1.addRuneToCurrenSpell(Rune.LIFE);
+        pl1.currentEffects.clear();
+        hp = pl1.getHp();
+        pl1.setSpell(pl1.createSpell());
+        assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, pl1.getHp());
+        pl1.currentEffects.clear();
     }
 
     @Test
     public void testDamage() throws Exception {
-        int hp = gm.getPlayer1().getHp();
-        gm.getPlayer1().damage(new Damage(3, EffectType.DEATH));
-        assertEquals("Что то не так с дамагом", hp - 3, gm.getPlayer1().getHp());
-        hp = gm.getPlayer1().getHp();
-        gm.getPlayer1().damage(new Damage(6, EffectType.DEATH));
-        assertEquals("Что то не так с дамагом", hp - 6, gm.getPlayer1().getHp());
-        hp = gm.getPlayer1().getHp();
-        gm.getPlayer1().damage(new Damage(-2, EffectType.DEATH));
-        assertEquals("Что то не так с дамагом", hp, gm.getPlayer1().getHp());
+        int hp = pl1.getHp();
+        pl1.damage(new Damage(3, EffectType.DEATH));
+        assertEquals("Что то не так с дамагом", hp - 3, pl1.getHp());
+        hp = pl1.getHp();
+        pl1.damage(new Damage(6, EffectType.DEATH));
+        assertEquals("Что то не так с дамагом", hp - 6, pl1.getHp());
+        hp = pl1.getHp();
+        pl1.damage(new Damage(-2, EffectType.DEATH));
+        assertEquals("Что то не так с дамагом", hp, pl1.getHp());
     }
 
     @Test
     public void testHeal() throws Exception {
-        int hp = gm.getPlayer1().getHp();
-        gm.getPlayer1().heal(new Heal(3));
-        assertEquals("Что то не так с хилом", hp + 3, gm.getPlayer1().getHp());
-        gm.getPlayer1().heal(new Heal(300));
-        assertEquals("Что то не так с хилом", 50, gm.getPlayer1().getHp());
-        gm.getPlayer1().heal(new Heal(-300));
-        assertEquals("Что то не так с хилом", 50, gm.getPlayer1().getHp());
+        pl1.damage(new Damage(30, EffectType.DEATH));
+        int hp = pl1.getHp();
+        pl1.heal(new Heal(3));
+        assertEquals("Что то не так с хилом", hp + 3, pl1.getHp());
+        pl1.heal(new Heal(300));
+        assertEquals("Что то не так с хилом", 50, pl1.getHp());
+        pl1.heal(new Heal(-300));
+        assertEquals("Что то не так с хилом", 50, pl1.getHp());
     }
+
 
     @Test
     public void testAddEffect() throws Exception {
-        gm.getPlayer1().addEffect(EffectType.DEATH);
-        assertEquals("Добавлен не тот эффект или не добаввлен вовсе", true, gm.getPlayer1().currentEffects.contains(new DeathEffect(Constants.DEATHTIME, true, EffectType.DEATH, 0, 2)));
+        pl1.addEffect(EffectType.DEATH);
+        assertTrue("Добавлен не тот эффект или не добаввлен вовсе", !pl1.currentEffects.isEmpty() && pl1.currentEffects.get(0).type == EffectType.DEATH);
     }
 
 }

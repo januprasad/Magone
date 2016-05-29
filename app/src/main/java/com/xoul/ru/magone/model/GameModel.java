@@ -13,8 +13,8 @@ public class GameModel implements Subject {
     private static  PlayerModel player2;
 
     static {
-        player1 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
-        player2 = new PlayerModel(new Hero(50), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
+        player1 = new PlayerModel(new Hero(50), 10, new LinkedList<Rune>(), new LinkedList<Effect>());
+        player2 = new PlayerModel(new Hero(50), 10, new LinkedList<Rune>(), new LinkedList<Effect>());
         currentPlayer = player1;
     }
 
@@ -32,7 +32,7 @@ public class GameModel implements Subject {
     public void castASpell() {
         Spell sp = currentPlayer.createSpell();
         if(currentPlayer.getMp() >= sp.manaAmountToCut)
-        currentPlayer.setSpell(sp,getEnemy());
+        currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
     }
 

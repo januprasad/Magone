@@ -20,7 +20,8 @@ public class Spell {
         this.heal = heal;
         this.damage = damage;
         this.manaAmountToCut = manaAmountToCut;
-        effectType = damage.effectType;
+        if (damage != null)
+            effectType = damage.effectType;
     }
 
     public boolean isSettingEffect() {

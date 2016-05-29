@@ -19,7 +19,7 @@ public class SpellFactory {
             } else if (list.get(0) == Rune.WATER) {
                 return new Spell(getEnemy(), SpellType.Damage, null, new Damage(Constants.SMALLWATERAMMOUNT, EffectType.WET), list.size());  //Заклинание воды не наносящее урон и вешающее эффект сырости
             } else if (list.get(0) == Rune.LIFE) {
-                return new Spell(getCurrentPlayer(), SpellType.Heal, new Heal(Constants.SMALLHEALAMMOUNT), new Damage(0, EffectType.HEAL), list.size());  //Заклинание жизненной энергии восстанавливающее  здоровье
+                return new Spell(getCurrentPlayer(), SpellType.Heal, new Heal(Constants.SMALLHEALAMMOUNT), null, list.size());  //Заклинание жизненной энергии восстанавливающее  здоровье
             } else if (list.get(0) == Rune.DEATH) {
                 return new Spell(getEnemy(), SpellType.Damage, null, new Damage(Constants.SMALLDEATHAMMOUNT, EffectType.DEATH), list.size());  //Заклинание воды не наносящее урон и вешающее эффект сырости
             }

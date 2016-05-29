@@ -32,32 +32,34 @@ public class PlayerModel {
     }
 
     //Приводит в действие переданное заклинание, проверяя его тип и изменяя в соответсвии с имющимися эффектами
-    public void setSpell(Spell spell,PlayerModel enemy) {
-        if (spell.spellType == SpellType.Damage) {
-            for (Effect eff : enemy.currentEffects) {
-                eff.damage(spell.damage);
-                eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
-            }
-            //наносим урон цели
-            if (spell.damage.damage > 0)
+    public void setSpell(Spell spell) {
+        if (spell.manaAmountToCut <= mp) {
+            if (spell.spellType == SpellType.Damage) {
+                if (!spell.target.currentEffects.isEmpty())
+                    for (Effect eff : spell.target.currentEffects) {
+                        eff.damage(spell.damage);
+                        eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
+
+                    }
+                //наносим урон цели
                 spell.target.damage(spell.damage);
-        }
-        if (spell.spellType == SpellType.Heal) {
-            for (Effect eff : enemy.currentEffects) {
-                eff.heal(spell.heal);
-                eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
             }
-            //лечим цель
-            if (spell.heal.heal > 0)
+            if (spell.spellType == SpellType.Heal) {
+                if (!spell.target.currentEffects.isEmpty())
+                    for (Effect eff : spell.target.currentEffects) {
+                        eff.heal(spell.heal);
+                        eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
+                    }
+                //лечим цель
                 spell.target.heal(spell.heal);
-        }
-        if (spell.spellType == SpellType.Buff) {
+            }
+            if (spell.spellType == SpellType.Buff) {
 
+            }
+            //вешаем эффект
+            if (spell.isSettingEffect() && spell.effectType != null) spell.target.addEffect(spell.effectType);
+            mp-=spell.manaAmountToCut;
         }
-        //вешаем эффект
-        if (spell.isSettingEffect() && spell.effectType!=null) addEffect(spell.effectType);
-        mp-=spell.manaAmountToCut;
-
     }
 
     //Наносит целочисленный урон игроку
@@ -79,16 +81,16 @@ public class PlayerModel {
     public void addEffect(EffectType effectType) {
         Effect effect = null;
         if (effectType == EffectType.FIRE) {
-            effect = new BurningEffect(Constants.BURNINGTIME, true, effectType,0,2);
+            effect = new BurningEffect(Constants.BURNINGTIME, true, effectType, 0, 2);
         }
         if (effectType == EffectType.DEATH) {
-            effect = new DeathEffect(Constants.DEATHTIME, true, effectType,0,2);
+            effect = new DeathEffect(Constants.DEATHTIME, true, effectType, 0, 2);
         }
         if (effectType == EffectType.HEAL) {
-            effect = new BurningEffect(Constants.HEALTIME, true, effectType,2,0);
+            effect = new BurningEffect(Constants.HEALTIME, true, effectType, 2, 0);
         }
         if (effectType == EffectType.WET) {
-            effect = new BurningEffect(Constants.WETTIME, true, effectType,0,0);
+            effect = new BurningEffect(Constants.WETTIME, true, effectType, 0, 0);
         }
         for (Effect eff : currentEffects) {
             if (eff.type == EffectType.FIRE)
@@ -120,11 +122,12 @@ public class PlayerModel {
     //собирает заклинание из уже переданных
     public Spell createSpell() {
         spell = SpellFactory.create(currentSpell);
+        clearCurrenSpell();
         return spell;
     }
 
-    public void endTurnEffect(int heal , int damage) {
+    public void endTurnEffect(int heal, int damage) {
         heal(new Heal(heal));
-        damage(new Damage(damage,null));
+        damage(new Damage(damage, null));
     }
 }
