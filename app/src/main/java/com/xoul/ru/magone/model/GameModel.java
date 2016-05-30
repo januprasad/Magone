@@ -30,10 +30,9 @@ public class GameModel implements Subject {
     }
 
     public void castASpell() {
-        Spell sp = currentPlayer.createSpell(currentPlayer, getEnemy());
-        if (sp != null)
-            if (currentPlayer.getMp() >= sp.manaAmountToCut)
-                currentPlayer.setSpell(sp);
+        Spell sp = currentPlayer.createSpell(currentPlayer,getEnemy());
+        if (currentPlayer.getMp() >= sp.manaAmountToCut)
+            currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
     }
 

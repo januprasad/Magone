@@ -22,7 +22,9 @@ public class SpellFactory {
                 return new Spell(enemy, SpellType.Damage, null, new Damage(Constants.SMALLDEATHAMMOUNT, EffectType.DEATH), list.size());  //Заклинание воды не наносящее урон и вешающее эффект сырости
             }
             return null;
-        } else {
+        } else
+
+        {
             return null;
         }
     }
