@@ -60,6 +60,16 @@ public class GameModelTest {
         gm.castASpell();
         Assert.assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, pl1.getHp());
         pl1.currentEffects.clear();
+
+        hp = pl1.getHp();
+        gm.castASpell();
+        Assert.assertEquals("Тест валится в том случае если заклинание не может быть создано", hp, pl1.getHp());
+        pl1.currentEffects.clear();
+
+        hp = pl2.getHp();
+        gm.castASpell();
+        Assert.assertEquals("Тест валится в том случае если заклинание не может быть создано", hp, pl2.getHp());
+        pl2.currentEffects.clear();
     }
 }
 
