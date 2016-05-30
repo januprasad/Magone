@@ -60,7 +60,6 @@ public class GameModelTest {
         gm.castASpell();
         Assert.assertEquals("Тест валится на заклинании лечения", hp + Constants.SMALLHEALAMMOUNT, pl1.getHp());
         pl1.currentEffects.clear();
-
     }
 }
 

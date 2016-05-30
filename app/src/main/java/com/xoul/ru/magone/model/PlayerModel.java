@@ -33,31 +33,32 @@ public class PlayerModel {
 
     //Приводит в действие переданное заклинание, проверяя его тип и изменяя в соответсвии с имющимися эффектами
     public void setSpell(Spell spell) {
-            if (spell.spellType == SpellType.Damage) {
-                if (!spell.target.currentEffects.isEmpty())
-                    for (Effect eff : spell.target.currentEffects) {
-                        eff.damage(spell.damage);
-                        eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
+        if (spell.spellType == SpellType.Damage) {
+            if (!spell.target.currentEffects.isEmpty())
+                for (Effect eff : spell.target.currentEffects) {
+                    eff.damage(spell.damage);
+                    eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
 
-                    }
-                //наносим урон цели
-                spell.target.damage(spell.damage);
-            }
-            if (spell.spellType == SpellType.Heal) {
-                if (!spell.target.currentEffects.isEmpty())
-                    for (Effect eff : spell.target.currentEffects) {
-                        eff.heal(spell.heal);
-                        eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
-                    }
-                //лечим цель
-                spell.target.heal(spell.heal);
-            }
-            if (spell.spellType == SpellType.Buff) {
+                }
+            //наносим урон цели
+            spell.target.damage(spell.damage);
+        }
+        if (spell.spellType == SpellType.Heal) {
+            if (!spell.target.currentEffects.isEmpty())
+                for (Effect eff : spell.target.currentEffects) {
+                    eff.heal(spell.heal);
+                    eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
+                }
+            //лечим цель
+            spell.target.heal(spell.heal);
+        }
+        if (spell.spellType == SpellType.Buff) {
 
 
             //вешаем эффект
-            if (spell.isSettingEffect() && spell.effectType != null) spell.target.addEffect(spell.effectType);
-            mp-=spell.manaAmountToCut;
+            if (spell.isSettingEffect() && spell.effectType != null)
+                spell.target.addEffect(spell.effectType);
+            mp -= spell.manaAmountToCut;
         }
     }
 
@@ -119,8 +120,8 @@ public class PlayerModel {
     }
 
     //собирает заклинание из уже переданных
-    public Spell createSpell() {
-        spell = SpellFactory.create(currentSpell);
+    public Spell createSpell(PlayerModel currentPlayer,PlayerModel enemy) {
+        spell = SpellFactory.create(currentSpell,currentPlayer,enemy);
         return spell;
     }
 

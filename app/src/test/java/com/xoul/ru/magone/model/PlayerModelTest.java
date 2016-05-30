@@ -20,7 +20,7 @@ public class PlayerModelTest {
 
     @Test
     public void testGetHp() throws Exception {
-        assertEquals("Полученное хп не верно", 50, pl1.getHp());
+        assertEquals("Полученное хп не верно", 50, gm.getPlayer1().getHp());
     }
 
     @Test
