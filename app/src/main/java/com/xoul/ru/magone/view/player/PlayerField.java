@@ -24,14 +24,17 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
     private ControlField controlField;
 
     private PlayerListener listener;
+    private boolean enabled;
 
     public PlayerField(Context context) {
         super(context);
+        enabled = true;
         initViews(context);
     }
 
     public PlayerField(Context context, AttributeSet attrs) {
         super(context, attrs);
+        enabled = true;
         initViews(context);
     }
 
@@ -83,7 +86,21 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
     }
 
     @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        controlField.setNextTurnVisible(enabled);
+    }
+
+    @Override
     public void onCastClicked() {
+        if (!enabled) {
+            return;
+        }
         List<com.xoul.ru.magone.model.Rune> spell = new LinkedList<>();
         for (Rune.RuneStyle style : controlField.getRunes()) {
             spell.add(com.xoul.ru.magone.model.Rune.values()[style.ordinal()]);
@@ -96,6 +113,9 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
 
     @Override
     public void onNextTurnClicked() {
+        if (!enabled) {
+            return;
+        }
         if (listener != null) {
             listener.onNextTurn();
         }
@@ -103,6 +123,9 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
 
     @Override
     public void onRuneClicked(Rune.RuneStyle runeStyle) {
+        if (!enabled) {
+            return;
+        }
         controlField.addRune(runeStyle);
     }
 }

@@ -62,6 +62,10 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
         castSpellButton.clear();
     }
 
+    public void setNextTurnVisible(boolean visible) {
+        nextTurn.setVisibility(visible ? VISIBLE : INVISIBLE);
+    }
+
     @Override
     public void onClick(View v) {
         if (listener != null) {
