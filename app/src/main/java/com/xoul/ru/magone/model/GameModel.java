@@ -22,6 +22,7 @@ public class GameModel implements Subject {
         currentPlayer.clearCurrenSpell();
         currentPlayer.endOfTurn(currentPlayer);
         currentPlayer.clearEffects();
+        getEnemy().clearEffects();
         if (currentPlayer == player1)
             currentPlayer = player2;
         else {
@@ -36,6 +37,7 @@ public class GameModel implements Subject {
             if (currentPlayer.getMp() >= sp.manaAmountToCut)
                 currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
+        getEnemy().clearEffects();
         notifyObserver();
     }
 
