@@ -11,6 +11,8 @@ public class WetEffect extends Effect {
 
     @Override
     public Damage damage(Damage damage) {
+        if (damage.effectType == EffectType.FIRE)
+            damage.damage -= 3;
         return damage;
     }
 

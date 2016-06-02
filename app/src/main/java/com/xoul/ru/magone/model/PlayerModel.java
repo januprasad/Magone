@@ -62,8 +62,6 @@ public class PlayerModel {
             spell.target.heal(spell.heal);
         }
         if (spell.spellType == SpellType.Buff) {
-
-
             //вешаем эффект
         }
         if (spell.isSettingEffect() && spell.effectType != null)
