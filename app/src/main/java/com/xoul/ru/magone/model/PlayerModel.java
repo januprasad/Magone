@@ -26,6 +26,10 @@ public class PlayerModel {
         this.currentEffects = currentEffects;
     }
 
+    public void addMP() {
+        mp += hero.getMpcharge();
+    }
+
     public int getHp() {
         return hero.getCurrenthp();
     }

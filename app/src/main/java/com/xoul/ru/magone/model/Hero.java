@@ -2,13 +2,15 @@ package com.xoul.ru.magone.model;
 
 public class Hero {
     private int currenthp;
+    private int mpcharge;
     private final int MAXHP;
 
     public int getMAXHP() {
         return MAXHP;
     }
 
-    public Hero(int MAXHP) {
+    public Hero(int MAXHP, int mpcharge) {
+        this.mpcharge = mpcharge;
         this.MAXHP = MAXHP;
         currenthp = MAXHP;
 
@@ -16,6 +18,10 @@ public class Hero {
 
     public int getCurrenthp() {
         return currenthp;
+    }
+
+    public int getMpcharge() {
+        return mpcharge;
     }
 
     public void damage(Damage damage) {
