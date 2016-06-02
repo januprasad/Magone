@@ -4,6 +4,10 @@ public class Hero {
     private int currenthp;
     private final int MAXHP;
 
+    public int getMAXHP() {
+        return MAXHP;
+    }
+
     public Hero(int MAXHP) {
         this.MAXHP = MAXHP;
         currenthp = MAXHP;

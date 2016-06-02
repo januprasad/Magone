@@ -26,6 +26,9 @@ public class PlayerModel {
     public int getHp() {
         return hero.getCurrenthp();
     }
+    public int getMaxHp() {
+        return hero.getMAXHP();
+    }
 
     public int getMp() {
         return mp;
