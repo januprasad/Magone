@@ -27,6 +27,7 @@ public class GameModel implements Subject {
         else {
             currentPlayer = player1;
         }
+        notifyObserver();
     }
 
     public void castASpell() {
@@ -35,6 +36,7 @@ public class GameModel implements Subject {
             if (currentPlayer.getMp() >= sp.manaAmountToCut)
                 currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
+        notifyObserver();
     }
 
     public PlayerModel getCurrentPlayer() {
