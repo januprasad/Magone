@@ -59,10 +59,10 @@ public class PlayerModel {
 
 
             //вешаем эффект
-            if (spell.isSettingEffect() && spell.effectType != null)
-                spell.target.addEffect(spell.effectType);
-            mp -= spell.manaAmountToCut;
         }
+        if (spell.isSettingEffect() && spell.effectType != null)
+            spell.target.addEffect(spell.effectType);
+        mp -= spell.manaAmountToCut;
     }
 
     //Наносит целочисленный урон игроку
