@@ -63,6 +63,10 @@ public class UnitField extends LinearLayout {
         }
     }
 
+    public Unit getUnit(Slot slot) {
+        return units[slot.ordinal()];
+    }
+
     public void removeUnit(Slot slot) {
         removeView(units[slot.ordinal()]);
         units[slot.ordinal()] = null;

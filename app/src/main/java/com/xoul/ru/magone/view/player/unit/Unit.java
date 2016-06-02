@@ -33,4 +33,20 @@ public class Unit extends RelativeLayout {
         healthBar = new HealthBar(context);
         addView(healthBar, params);
     }
+
+    public int getHp() {
+        return healthBar.getValue();
+    }
+
+    public int getMaxHp() {
+        return healthBar.getMaxValue();
+    }
+
+    public void setHp(int hp) {
+        healthBar.setValue(hp);
+    }
+
+    public void setMaxHp(int hp) {
+        healthBar.setMaxValue(hp);
+    }
 }
