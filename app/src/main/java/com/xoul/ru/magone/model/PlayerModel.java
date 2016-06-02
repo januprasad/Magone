@@ -73,8 +73,14 @@ public class PlayerModel {
     }
 
     //Добавляет руну по которой кликнули в текущий лист хранящий набранное заклинание
-    public void addRuneToCurrenSpell(Rune rune) {
+    public void addRuneToCurrentSpell(Rune rune) {
         currentSpell.add(rune);
+    }
+
+    //Метод написанный благодаря тому что саня педик
+    public void addRuneToCurrentSpell(List<Rune> list) {
+        currentSpell.clear();
+        currentSpell = list;
     }
 
     //добавляет к текущим эффектам висящим на игроке новый переданного типа
