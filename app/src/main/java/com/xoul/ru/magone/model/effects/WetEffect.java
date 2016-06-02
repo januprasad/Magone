@@ -16,8 +16,10 @@ public class WetEffect extends Effect {
 
     @Override
     public boolean isOpposite(EffectType type) {
-        if (type == EffectType.FIRE)
+        if (type == EffectType.FIRE){
+            unavailable();
             return true;
+        }
         return false;
     }
 }

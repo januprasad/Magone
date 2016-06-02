@@ -20,8 +20,10 @@ public class BurningEffect extends Effect {
 
     @Override
     public boolean isOpposite(EffectType type) {
-        if (type == EffectType.WET)
+        if (type == EffectType.WET){
+            unavailable();
             return true;
+        }
         return false;
     }
 }

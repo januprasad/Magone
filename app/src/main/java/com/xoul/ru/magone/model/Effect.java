@@ -39,7 +39,7 @@ public abstract class Effect {
         currentPlayer.endTurnEffect(healAmmount,damageAmmount);
     }
 
-    private void unavailable(){
+    protected void unavailable(){
         available = false;
     }
 

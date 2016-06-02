@@ -1,6 +1,5 @@
 package com.xoul.ru.magone.model.effects;
 
-import com.xoul.ru.magone.model.Damage;
 import com.xoul.ru.magone.model.Effect;
 import com.xoul.ru.magone.model.EffectType;
 import com.xoul.ru.magone.model.Heal;
@@ -18,6 +17,10 @@ public class DeathEffect extends Effect {
 
     @Override
     public boolean isOpposite(EffectType type) {
+        if (type == EffectType.HEAL){
+            unavailable();
+            return true;
+        }
         return false;
     }
 }

@@ -2,10 +2,13 @@ package com.xoul.ru.magone.model;
 
 import com.xoul.ru.magone.model.effects.BurningEffect;
 import com.xoul.ru.magone.model.effects.DeathEffect;
+import com.xoul.ru.magone.model.effects.HealEffect;
+import com.xoul.ru.magone.model.effects.WetEffect;
 import com.xoul.ru.magone.model.spells.Spell;
 import com.xoul.ru.magone.model.spells.SpellFactory;
 import com.xoul.ru.magone.model.spells.SpellType;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class PlayerModel {
@@ -26,6 +29,7 @@ public class PlayerModel {
     public int getHp() {
         return hero.getCurrenthp();
     }
+
     public int getMaxHp() {
         return hero.getMAXHP();
     }
@@ -40,7 +44,8 @@ public class PlayerModel {
             if (!spell.target.currentEffects.isEmpty())
                 for (Effect eff : spell.target.currentEffects) {
                     eff.damage(spell.damage);
-                    eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
+                    if (eff.isOpposite(spell.effectType))
+                        spell.findOppositEffect();//проверяем вешать ли еффект
 
                 }
             //наносим урон цели
@@ -50,7 +55,8 @@ public class PlayerModel {
             if (!spell.target.currentEffects.isEmpty())
                 for (Effect eff : spell.target.currentEffects) {
                     eff.heal(spell.heal);
-                    eff.isOpposite(spell.effectType);//проверяем вешать ли еффект
+                    if (eff.isOpposite(spell.effectType))
+                        spell.findOppositEffect();//проверяем вешать ли еффект
                 }
             //лечим цель
             spell.target.heal(spell.heal);
@@ -63,6 +69,7 @@ public class PlayerModel {
         if (spell.isSettingEffect() && spell.effectType != null)
             spell.target.addEffect(spell.effectType);
         mp -= spell.manaAmountToCut;
+        clearEffects();
     }
 
     //Наносит целочисленный урон игроку
@@ -88,6 +95,12 @@ public class PlayerModel {
 
     //добавляет к текущим эффектам висящим на игроке новый переданного типа
     public void addEffect(EffectType effectType) {
+        Iterator<Effect> effectIterator = currentEffects.iterator();
+        while (effectIterator.hasNext()) {
+            Effect eff = effectIterator.next();
+            if (eff.type == effectType)
+                effectIterator.remove();
+        }
         Effect effect = null;
         if (effectType == EffectType.FIRE) {
             effect = new BurningEffect(Constants.BURNINGTIME, true, effectType, 0, 2);
@@ -96,14 +109,10 @@ public class PlayerModel {
             effect = new DeathEffect(Constants.DEATHTIME, true, effectType, 0, 2);
         }
         if (effectType == EffectType.HEAL) {
-            effect = new BurningEffect(Constants.HEALTIME, true, effectType, 2, 0);
+            effect = new HealEffect(Constants.HEALTIME, true, effectType, 2, 0);
         }
         if (effectType == EffectType.WET) {
-            effect = new BurningEffect(Constants.WETTIME, true, effectType, 0, 0);
-        }
-        for (Effect eff : currentEffects) {
-            if (eff.type == EffectType.FIRE)
-                currentEffects.remove(eff);
+            effect = new WetEffect(Constants.WETTIME, true, effectType, 0, 0);
         }
         if (effect != null)
             currentEffects.add(effect);
@@ -116,8 +125,10 @@ public class PlayerModel {
 
     //очищает эффекты у которых либо закончилось время действия либо которые были сняты другим эффектом
     public void clearEffects() {
-        for (Effect eff : currentEffects) {
-            if (!eff.isAvailable()) currentEffects.remove(eff);
+        Iterator<Effect> eff = currentEffects.iterator();
+        while (eff.hasNext()) {
+            Effect effect = eff.next();
+            if (!effect.isAvailable()) eff.remove();
         }
     }
 
@@ -129,8 +140,8 @@ public class PlayerModel {
     }
 
     //собирает заклинание из уже переданных
-    public Spell createSpell(PlayerModel currentPlayer,PlayerModel enemy) {
-        spell = SpellFactory.create(currentSpell,currentPlayer,enemy);
+    public Spell createSpell(PlayerModel currentPlayer, PlayerModel enemy) {
+        spell = SpellFactory.create(currentSpell, currentPlayer, enemy);
         return spell;
     }
 
