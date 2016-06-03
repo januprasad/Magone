@@ -49,7 +49,7 @@ public class Effect extends View {
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
         outsideRect.set(0, 0, w, h);
-        paint.setTextSize(h);
+        paint.setTextSize(h * 11 / 9f);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

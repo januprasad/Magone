@@ -5,6 +5,7 @@ import android.util.Log;
 import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.model.GameModel;
 import com.xoul.ru.magone.view.player.PlayerField;
+import com.xoul.ru.magone.view.player.unit.Hero;
 import com.xoul.ru.magone.view.player.unit.Unit;
 import com.xoul.ru.magone.view.player.unit.UnitField.Slot;
 
@@ -44,17 +45,16 @@ public class Drawer implements Observer {
     public void update() {
         int hp1 = model.getPlayer1().getHp();
         int mp1 = model.getPlayer1().getMp();
-        Unit hero1 = player1.getUnitField().getUnit(Slot.HERO);
+        Hero hero1 = (Hero) player1.getUnitField().getUnit(Slot.HERO);
         hero1.setHp(hp1);
         player1.getPlayerInfoField().setMp(mp1);
+        hero1.setEffects(model.getPlayer1().currentEffects);
 
         int hp2 = model.getPlayer2().getHp();
         int mp2 = model.getPlayer2().getMp();
-        Unit hero2 = player2.getUnitField().getUnit(Slot.HERO);
+        Hero hero2 = (Hero) player2.getUnitField().getUnit(Slot.HERO);
         hero2.setHp(hp2);
         player2.getPlayerInfoField().setMp(mp2);
-
-        Log.d("Drawer", "update: hp1 = " + hp1 + " hp2 = " + hp2);
-        Log.d("Drawer", "update: mp1 = " + mp1 + " mp2 = " + mp2);
+        hero2.setEffects(model.getPlayer2().currentEffects);
     }
 }

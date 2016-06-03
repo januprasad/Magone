@@ -47,7 +47,7 @@ public class UnitField extends LinearLayout {
     }
 
     private void initUnits(Context context) {
-        addUnit(new Unit(context), Slot.HERO);
+        addUnit(new Hero(context), Slot.HERO);
     }
 
     public void addUnit(Unit unit, Slot slot) {
