@@ -1,11 +1,15 @@
 package com.xoul.ru.magone;
 
+import android.util.Log;
+
 import com.xoul.ru.magone.model.GameModel;
 import com.xoul.ru.magone.model.PlayerModel;
 import com.xoul.ru.magone.model.Rune;
 import com.xoul.ru.magone.view.Drawer;
 import com.xoul.ru.magone.view.player.PlayerField;
 import com.xoul.ru.magone.view.player.PlayerListener;
+import com.xoul.ru.magone.view.player.unit.Unit;
+import com.xoul.ru.magone.view.player.unit.UnitField;
 
 import java.util.List;
 
@@ -19,6 +23,8 @@ public class GameController implements PlayerListener {
 
     private PlayerModel player1model;
     private PlayerModel player2model;
+
+    private List<Rune> spell;
 
     public GameController(GameModel model, PlayerField player1, PlayerField player2) {
         this.model = model;
@@ -38,10 +44,40 @@ public class GameController implements PlayerListener {
         player2.setEnabled(!isPlayer1);
     }
 
+    private PlayerField getCurrentPlayerField() {
+        if (isPlayer1) {
+            return player1;
+        } else {
+            return player2;
+        }
+    }
+
     @Override
     public void onCast(List<Rune> spell) {
-        model.getCurrentPlayer().addRuneToCurrentSpell(spell);
-        model.castASpell();
+        // TODO target spell casting
+        if (/* model.isTargetingSpell(spell) */ spell.size() > 1) {
+            this.spell = spell;
+            getCurrentPlayerField().setChooseUnit(true);
+        } else {
+            this.spell = null;
+            model.getCurrentPlayer().addRuneToCurrentSpell(spell);
+            model.castASpell();
+        }
+    }
+
+    @Override
+    public void onUnitSelected(Unit unit, UnitField.Slot slot) {
+        // TODO target spell casting
+        if (spell != null) {
+            getCurrentPlayerField().setChooseUnit(false); /* model.castASpell(spell, slot or player); */
+            Log.d("Controller", "cast unit spell");
+            spell = null;
+        }
+    }
+
+    @Override
+    public void onClear() {
+        spell = null;
     }
 
     @Override

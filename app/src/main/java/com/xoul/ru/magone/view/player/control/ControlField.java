@@ -58,6 +58,10 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
         return castSpellButton.getRunes();
     }
 
+    public void setChooseUnit() {
+        castSpellButton.setChooseUnit();
+    }
+
     public void clear() {
         castSpellButton.clear();
     }
@@ -73,6 +77,7 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
                 listener.onNextTurnClicked();
             } else if (v == clearButton) {
                 clear();
+                listener.onClearClicked();
             } else {
                 listener.onCastClicked();
             }
@@ -81,6 +86,7 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
 
     public interface OnControlClickedListener {
         void onCastClicked();
+        void onClearClicked();
         void onNextTurnClicked();
     }
 }

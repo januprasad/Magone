@@ -36,6 +36,11 @@ public class TextLabel extends View {
         paint.setTextAlign(Paint.Align.CENTER);
     }
 
+    public void setText(String text) {
+        this.text = text;
+        invalidate();
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int w = MeasureSpec.getSize(widthMeasureSpec);

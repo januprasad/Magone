@@ -3,17 +3,19 @@ package com.xoul.ru.magone.view.player.unit;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.xoul.ru.magone.view.other.Utils;
 
-public class UnitField extends LinearLayout {
+public class UnitField extends LinearLayout implements View.OnClickListener {
     private static final int UNIT_MARGIN_DP = 5;
     private int unitWidthPx;
     private LayoutParams layoutParams;
 
     private Unit[] units;
+    private OnUnitClickListener listener;
 
     public UnitField(Context context) {
         super(context);
@@ -50,6 +52,10 @@ public class UnitField extends LinearLayout {
         addUnit(new Hero(context), Slot.HERO);
     }
 
+    public void setListener(OnUnitClickListener listener) {
+        this.listener = listener;
+    }
+
     public void addUnit(Unit unit, Slot slot) {
         if (units[slot.ordinal()] != null) {
             removeUnit(slot);
@@ -59,6 +65,7 @@ public class UnitField extends LinearLayout {
         for (Unit item : units) {
             if (item != null) {
                 addView(item, layoutParams);
+                item.setOnClickListener(this);
             }
         }
     }
@@ -85,6 +92,18 @@ public class UnitField extends LinearLayout {
         for (Unit unit : units) {
             if (unit != null) {
                 removeView(unit);
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        for (int i = 0; i < Slot.values().length; i++) {
+            if (units[i] == v) {
+                if (listener != null) {
+                    listener.onUnitClick(units[i], Slot.values()[i]);
+                }
+                return;
             }
         }
     }
