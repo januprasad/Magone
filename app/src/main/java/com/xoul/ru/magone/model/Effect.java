@@ -1,6 +1,10 @@
 package com.xoul.ru.magone.model;
 
 public abstract class Effect {
+    public int getTimeleft() {
+        return timeleft;
+    }
+
     private int timeleft;
     private boolean available;
     public EffectType type;
