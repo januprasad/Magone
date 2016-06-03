@@ -5,36 +5,51 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.xoul.ru.magone.model.EffectType;
+import com.xoul.ru.magone.model.effects.BurningEffect;
+import com.xoul.ru.magone.model.effects.HealEffect;
+import com.xoul.ru.magone.model.effects.WetEffect;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class EffectLayout extends LinearLayout {
-    private List<Effect> effects;
-
+    private Context context;
     private LayoutParams params;
 
     public EffectLayout(Context context) {
         super(context);
+        this.context = context;
         init(context);
     }
 
     public EffectLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         init(context);
     }
 
     private void init(Context context) {
-        effects = new LinkedList<>();
         setOrientation(HORIZONTAL);
         params = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
         params.weight = 1;
+        initEffects(context);
+    }
+
+    private void initEffects(Context context) {
+        List<com.xoul.ru.magone.model.Effect> effects = new LinkedList<>();
+        effects.add(new BurningEffect(5, true, EffectType.FIRE, 0, 3));
+        effects.add(new HealEffect(5, true, EffectType.HEAL, 0, 3));
+        //effects.add(new WetEffect(5, true, EffectType.WET, 0, 3));
+        setEffects(effects);
     }
 
     public void setEffects(List<com.xoul.ru.magone.model.Effect> effects) {
-        this.effects.clear();
+        removeAllViews();
         for (com.xoul.ru.magone.model.Effect effect : effects) {
             int index = effect.type.ordinal();
-            this.effects.add(new Effect())
+            Effect effectView = new Effect(context, Effect.EffectType.values()[index], 5);
+            addView(effectView, params);
         }
     }
 }
