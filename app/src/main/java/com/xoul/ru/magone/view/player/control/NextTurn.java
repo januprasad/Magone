@@ -36,7 +36,7 @@ public class NextTurn extends View {
     }
 
     private void init() {
-        text = "✔";
+        text = "➡";
         outsideRect = new Rect();
         insideRect = new Rect();
         bounds = new Rect(0, 0, 0, 0);
@@ -50,11 +50,7 @@ public class NextTurn extends View {
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
         outsideRect.set(0, 0, w, h);
-        textSize = h * 9 / 10;
-        int maxTextSize = Utils.dpPx(getContext(), 32);
-        if (textSize > maxTextSize) {
-            textSize = maxTextSize;
-        }
+        textSize = h * 8 / 10;
         paint.setTextSize(textSize);
         int border = (w < h) ? w : h; // min(w, h);
         border *= borderMultiplier;

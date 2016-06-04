@@ -35,26 +35,26 @@ public class GameModelTest {
         pl1.currentEffects.clear();
         pl2.currentEffects.clear();
         int hp;
-        pl1.addRuneToCurrenSpell(Rune.FIRE);
+        pl1.addRuneToCurrentSpell(Rune.FIRE);
         hp = pl2.getHp();
         gm.castASpell();
         Assert.assertEquals("Тест валится на заклинании огня", hp - Constants.SMALLFIREDAMAGE, pl2.getHp());
         pl2.currentEffects.clear();
 
-        pl1.addRuneToCurrenSpell(Rune.DEATH);
+        pl1.addRuneToCurrentSpell(Rune.DEATH);
         hp = pl2.getHp();
         gm.castASpell();
         Assert.assertEquals("Тест валится на заклинании смерти", hp - Constants.SMALLDEATHAMMOUNT, pl2.getHp());
         pl2.currentEffects.clear();
 
-        pl1.addRuneToCurrenSpell(Rune.WATER);
+        pl1.addRuneToCurrentSpell(Rune.WATER);
         hp = pl2.getHp();
         gm.castASpell();
         Assert.assertEquals("Тест валится на заклинании водицы", hp - Constants.SMALLWATERAMMOUNT, pl2.getHp());
         pl2.currentEffects.clear();
 
         pl1.damage(new Damage(4,null));
-        pl1.addRuneToCurrenSpell(Rune.LIFE);
+        pl1.addRuneToCurrentSpell(Rune.LIFE);
         pl1.currentEffects.clear();
         hp = pl1.getHp();
         gm.castASpell();

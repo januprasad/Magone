@@ -1,11 +1,15 @@
 package com.xoul.ru.magone.model;
 
 public abstract class Effect {
+    public int getTimeleft() {
+        return timeleft;
+    }
+
     private int timeleft;
     private boolean available;
     public EffectType type;
-    private int healAmmount;
-    private  int damageAmmount;
+    protected int healAmmount;
+    protected int damageAmmount;
 
     public Effect(int timeleft, boolean available, EffectType type, int healAmmount, int damageAmmount) {
         this.timeleft = timeleft;
@@ -36,10 +40,10 @@ public abstract class Effect {
         if (timeleft < 1) {
             unavailable();
         }
-        currentPlayer.endTurnEffect(healAmmount,damageAmmount);
+        currentPlayer.endTurnEffect(healAmmount, damageAmmount);
     }
 
-    private void unavailable(){
+    protected void unavailable() {
         available = false;
     }
 

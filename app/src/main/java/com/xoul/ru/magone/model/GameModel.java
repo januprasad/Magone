@@ -11,22 +11,30 @@ public class GameModel implements Subject {
     private PlayerModel currentPlayer;
     private PlayerModel player1;
     private PlayerModel player2;
+    private int round;
 
     public GameModel() {
-        player1 = new PlayerModel(new Hero(50), 10, new LinkedList<Rune>(), new LinkedList<Effect>());
-        player2 = new PlayerModel(new Hero(50), 10, new LinkedList<Rune>(), new LinkedList<Effect>());
+        player1 = new PlayerModel(new Hero(50, 1), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
+        player2 = new PlayerModel(new Hero(35, 2), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
         currentPlayer = player1;
     }
 
     public void endOfTurn() {
+        round++;
         currentPlayer.clearCurrenSpell();
         currentPlayer.endOfTurn(currentPlayer);
         currentPlayer.clearEffects();
+        getEnemy().clearEffects();
+        if (round % 2 == 0) {
+            getEnemy().addMP();
+            currentPlayer.addMP();
+        }
         if (currentPlayer == player1)
             currentPlayer = player2;
         else {
             currentPlayer = player1;
         }
+        notifyObserver();
     }
 
     public void castASpell() {
@@ -34,6 +42,8 @@ public class GameModel implements Subject {
         if (currentPlayer.getMp() >= sp.manaAmountToCut)
             currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
+        getEnemy().clearEffects();
+        notifyObserver();
     }
 
     public PlayerModel getCurrentPlayer() {

@@ -23,4 +23,9 @@
         <attr name="maxValue" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="PlayerField">
+        <attr name="enabled" format="boolean" />
+        <attr name="chooseUnit" format="boolean" />
+    </declare-styleable>
+
 </resources>

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 public class Unit extends RelativeLayout {
-    private static final int HP_BAR_HEIGHT_DP = 25;
+    protected static final int HP_BAR_HEIGHT_DP = 25;
 
     protected UnitImage unitImage;
     protected HealthBar healthBar;
@@ -22,7 +22,7 @@ public class Unit extends RelativeLayout {
         initSubViews(context);
     }
 
-    private void initSubViews(Context context) {
+    protected void initSubViews(Context context) {
         unitImage = new UnitImage(context);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addView(unitImage, params);
@@ -32,5 +32,21 @@ public class Unit extends RelativeLayout {
         params.addRule(ALIGN_PARENT_BOTTOM);
         healthBar = new HealthBar(context);
         addView(healthBar, params);
+    }
+
+    public int getHp() {
+        return healthBar.getValue();
+    }
+
+    public int getMaxHp() {
+        return healthBar.getMaxValue();
+    }
+
+    public void setHp(int hp) {
+        healthBar.setValue(hp);
+    }
+
+    public void setMaxHp(int hp) {
+        healthBar.setMaxValue(hp);
     }
 }

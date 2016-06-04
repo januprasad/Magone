@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.xoul.ru.magone.R;
 import com.xoul.ru.magone.view.other.Utils;
 import com.xoul.ru.magone.view.player.rune.Rune;
 
@@ -18,6 +19,9 @@ public class CastSpellButton extends RelativeLayout {
 
     private LayoutParams params;
 
+    private String chooseUnitString;
+    private String castString;
+
     public CastSpellButton(Context context) {
         super(context);
         init(context);
@@ -29,6 +33,8 @@ public class CastSpellButton extends RelativeLayout {
     }
 
     public void init(Context context) {
+        chooseUnitString = context.getString(R.string.choose_unit);
+        castString = context.getString(R.string.cast);
         int margin = Utils.dpPx(context, MARGIN_DP);
         background = new CastButton(context);
         button = new CastButtonLayout(context);
@@ -37,7 +43,7 @@ public class CastSpellButton extends RelativeLayout {
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         params.setMargins(margin, margin, margin, margin);
         addView(button, params);
-        button.clear();
+        clear();
     }
 
     public void addRune(Rune.RuneStyle style) {
@@ -46,10 +52,18 @@ public class CastSpellButton extends RelativeLayout {
 
     public void clear() {
         button.clear();
+        button.setText(castString);
+        background.setAlwaysPressed(false);
     }
 
     public List<Rune.RuneStyle> getRunes() {
         return button.getRunes();
+    }
+
+    public void setChooseUnit() {
+        button.setText(chooseUnitString);
+        button.setSpellFieldVisible(true);
+        background.setAlwaysPressed(true);
     }
 
     @Override

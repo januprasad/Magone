@@ -1,21 +1,25 @@
 package com.xoul.ru.magone.view.player;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.xoul.ru.magone.R;
 import com.xoul.ru.magone.view.other.Utils;
 import com.xoul.ru.magone.view.player.control.ControlField;
 import com.xoul.ru.magone.view.player.info.PlayerInfoField;
 import com.xoul.ru.magone.view.player.rune.Rune;
 import com.xoul.ru.magone.view.player.rune.RuneField;
+import com.xoul.ru.magone.view.player.unit.OnUnitClickListener;
+import com.xoul.ru.magone.view.player.unit.Unit;
 import com.xoul.ru.magone.view.player.unit.UnitField;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class PlayerField extends LinearLayout implements RuneField.OnRuneClickedListener, ControlField.OnControlClickedListener {
+public class PlayerField extends LinearLayout implements RuneField.OnRuneClickedListener, ControlField.OnControlClickedListener, OnUnitClickListener {
     private static final int MARGIN_DP = 10;
 
     private UnitField unitField;
@@ -25,6 +29,7 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
 
     private PlayerListener listener;
     private boolean enabled;
+    private boolean chooseUnit;
 
     public PlayerField(Context context) {
         super(context);
@@ -36,6 +41,11 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
         super(context, attrs);
         enabled = true;
         initViews(context);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PlayerField, 0, 0);
+        boolean enabled = typedArray.getBoolean(R.styleable.PlayerField_enabled, true);
+        boolean chooseUnit = typedArray.getBoolean(R.styleable.PlayerField_chooseUnit, false);
+        setEnabled(enabled);
+        setChooseUnit(chooseUnit);
     }
 
     private void initViews(Context context) {
@@ -46,6 +56,7 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
         //params.setMargins(MARGIN_DP, MARGIN_DP, MARGIN_DP, MARGIN_DP / 2);
         unitField = new UnitField(context);
         addView(unitField, params);
+        unitField.setListener(this);
 
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dpPx(context, 25));
         params.setMargins(MARGIN_DP, 0, MARGIN_DP, MARGIN_DP );
@@ -96,6 +107,15 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
         controlField.setNextTurnVisible(enabled);
     }
 
+    public void setChooseUnit(boolean choose) {
+        chooseUnit = choose;
+        if (choose) {
+            controlField.setChooseUnit();
+        } else {
+            controlField.clear();
+        }
+    }
+
     @Override
     public void onCastClicked() {
         if (!enabled) {
@@ -108,7 +128,30 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
         if (listener != null) {
             listener.onCast(spell);
         }
-        controlField.clear();
+        if (!chooseUnit) {
+            controlField.clear();
+        }
+    }
+
+    @Override
+    public void onClearClicked() {
+        if (!enabled) {
+            return;
+        }
+        setChooseUnit(false);
+        if (listener != null) {
+            listener.onClear();
+        }
+    }
+
+    @Override
+    public void onHelpClicked() {
+        if (!enabled) {
+            return;
+        }
+        if (listener != null) {
+            listener.onHelp();
+        }
     }
 
     @Override
@@ -127,5 +170,14 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
             return;
         }
         controlField.addRune(runeStyle);
+    }
+
+    @Override
+    public void onUnitClick(Unit unit, UnitField.Slot slot) {
+        if (slot == UnitField.Slot.HERO) {
+            if (listener != null) {
+                listener.onUnitSelected(unit, slot);
+            }
+        }
     }
 }
