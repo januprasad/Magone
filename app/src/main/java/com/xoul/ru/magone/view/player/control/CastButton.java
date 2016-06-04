@@ -17,6 +17,8 @@ public class CastButton extends View {
     private Rect insideRect;
     private Paint paint;
 
+    private boolean alwaysPressed;
+
     public CastButton(Context context) {
         super(context);
         init();
@@ -31,6 +33,11 @@ public class CastButton extends View {
         outsideRect = new Rect();
         insideRect = new Rect();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    }
+
+    public void setAlwaysPressed(boolean alwaysPressed) {
+        this.alwaysPressed = alwaysPressed;
+        invalidate();
     }
 
     @Override
@@ -48,7 +55,7 @@ public class CastButton extends View {
     protected void onDraw(Canvas canvas) {
         paint.setColor(borderColor);
         canvas.drawRect(outsideRect, paint);
-        if (isPressed()) {
+        if (isPressed() || alwaysPressed) {
             paint.setColor(borderColor);
         } else {
             paint.setColor(color);
