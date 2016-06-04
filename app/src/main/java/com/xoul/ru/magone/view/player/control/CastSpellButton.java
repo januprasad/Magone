@@ -61,6 +61,7 @@ public class CastSpellButton extends RelativeLayout {
 
     public void setChooseUnit() {
         button.setText(chooseUnitString);
+        button.setSpellFieldVisible(true);
     }
 
     @Override

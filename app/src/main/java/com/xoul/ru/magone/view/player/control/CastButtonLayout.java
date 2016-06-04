@@ -50,6 +50,14 @@ public class CastButtonLayout extends LinearLayout {
         textLabel.setText(text);
     }
 
+    public void setSpellFieldVisible(boolean visible) {
+        if (visible) {
+            spellField.setVisibility(VISIBLE);
+        } else {
+            spellField.setVisibility(GONE);
+        }
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int w = MeasureSpec.getSize(widthMeasureSpec);

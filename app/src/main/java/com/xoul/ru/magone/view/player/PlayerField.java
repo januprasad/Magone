@@ -1,10 +1,12 @@
 package com.xoul.ru.magone.view.player;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.xoul.ru.magone.R;
 import com.xoul.ru.magone.view.other.Utils;
 import com.xoul.ru.magone.view.player.control.ControlField;
 import com.xoul.ru.magone.view.player.info.PlayerInfoField;
@@ -39,6 +41,11 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
         super(context, attrs);
         enabled = true;
         initViews(context);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PlayerField, 0, 0);
+        boolean enabled = typedArray.getBoolean(R.styleable.PlayerField_enabled, true);
+        boolean chooseUnit = typedArray.getBoolean(R.styleable.PlayerField_chooseUnit, false);
+        setEnabled(enabled);
+        setChooseUnit(chooseUnit);
     }
 
     private void initViews(Context context) {
