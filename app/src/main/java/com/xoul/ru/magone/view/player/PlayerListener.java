@@ -11,6 +11,7 @@ public interface PlayerListener {
     void onCast(List<Rune> spell);
     void onUnitSelected(Unit unit, Slot slot);
     void onClear();
+    void onHelp();
     void onNextTurn();
 
 }

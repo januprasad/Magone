@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 public class ClearButton extends NextTurn {
     private static final String CLEAR = "✘";
     private static final String QUESTION = "?";
-    boolean question;
+    private boolean question;
 
     public ClearButton(Context context) {
         super(context);
@@ -19,7 +19,7 @@ public class ClearButton extends NextTurn {
     }
 
     private void init() {
-        text = CLEAR;
+        text = QUESTION;
     }
 
     public boolean isQuestion() {
@@ -33,5 +33,6 @@ public class ClearButton extends NextTurn {
         } else {
             text = CLEAR;
         }
+        invalidate();
     }
 }

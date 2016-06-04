@@ -145,6 +145,16 @@ public class PlayerField extends LinearLayout implements RuneField.OnRuneClicked
     }
 
     @Override
+    public void onHelpClicked() {
+        if (!enabled) {
+            return;
+        }
+        if (listener != null) {
+            listener.onHelp();
+        }
+    }
+
+    @Override
     public void onNextTurnClicked() {
         if (!enabled) {
             return;

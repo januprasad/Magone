@@ -81,6 +81,11 @@ public class GameController implements PlayerListener {
     }
 
     @Override
+    public void onHelp() {
+        Log.d("PlayerField", "Help button clicked");
+    }
+
+    @Override
     public void onNextTurn() {
         model.endOfTurn();
         togglePlayer();

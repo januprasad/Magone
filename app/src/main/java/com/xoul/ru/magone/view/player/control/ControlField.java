@@ -52,6 +52,7 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
 
     public void addRune(Rune.RuneStyle style) {
         castSpellButton.addRune(style);
+        clearButton.setQuestion(false);
     }
 
     public List<Rune.RuneStyle> getRunes() {
@@ -64,6 +65,7 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
 
     public void clear() {
         castSpellButton.clear();
+        clearButton.setQuestion(true);
     }
 
     public void setNextTurnVisible(boolean visible) {
@@ -76,8 +78,12 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
             if (v == nextTurn) {
                 listener.onNextTurnClicked();
             } else if (v == clearButton) {
-                clear();
-                listener.onClearClicked();
+                if (clearButton.isQuestion()) {
+                    listener.onHelpClicked();
+                } else {
+                    clear();
+                    listener.onClearClicked();
+                }
             } else {
                 listener.onCastClicked();
             }
@@ -87,6 +93,7 @@ public class ControlField extends RelativeLayout implements View.OnClickListener
     public interface OnControlClickedListener {
         void onCastClicked();
         void onClearClicked();
+        void onHelpClicked();
         void onNextTurnClicked();
     }
 }
