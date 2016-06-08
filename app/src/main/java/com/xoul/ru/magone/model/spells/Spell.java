@@ -1,11 +1,12 @@
 package com.xoul.ru.magone.model.spells;
 
+import com.xoul.ru.magone.Targetable;
 import com.xoul.ru.magone.model.Damage;
 import com.xoul.ru.magone.model.EffectType;
 import com.xoul.ru.magone.model.Heal;
 import com.xoul.ru.magone.model.PlayerModel;
 
-public class Spell {
+public class Spell implements Targetable {
     public SpellType spellType;
     public Heal heal;
     public EffectType effectType;
@@ -30,5 +31,17 @@ public class Spell {
 
     public void findOppositEffect() {
         settingEffect = false;
+    }
+
+    @Override
+    public boolean hasTarget() {
+        if (target == null)
+            return false;
+        return true;
+    }
+
+    @Override
+    public void setTarget(PlayerModel target) {
+        this.target = target;
     }
 }
