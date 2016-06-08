@@ -6,6 +6,7 @@ import com.xoul.ru.magone.model.effects.HealEffect;
 import com.xoul.ru.magone.model.effects.WetEffect;
 import com.xoul.ru.magone.model.spells.Spell;
 import com.xoul.ru.magone.model.spells.SpellFactory;
+import com.xoul.ru.magone.model.spells.SpellStorage;
 import com.xoul.ru.magone.model.spells.SpellType;
 
 import java.util.Iterator;
@@ -18,12 +19,14 @@ public class PlayerModel {
     public List<Effect> currentEffects;
     public List<Rune> currentSpell;
     private Spell spell;
+    private SpellStorage spellStorage;
 
-    public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects) {
+    public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects,SpellStorage spellStorage) {
         this.hero = hero;
         this.mp = mp;
         this.currentSpell = currentSpell;
         this.currentEffects = currentEffects;
+        this.spellStorage = spellStorage;
     }
 
     public void addMP() {
@@ -144,7 +147,7 @@ public class PlayerModel {
 
     //собирает заклинание из уже переданных
     public Spell createSpell(PlayerModel currentPlayer, PlayerModel enemy) {
-        spell = SpellFactory.create(currentSpell, currentPlayer, enemy);
+        spell = SpellFactory.create(currentSpell, currentPlayer, enemy,spellStorage);
         return spell;
     }
 

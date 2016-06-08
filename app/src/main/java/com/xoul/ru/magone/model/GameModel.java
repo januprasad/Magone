@@ -3,19 +3,25 @@ package com.xoul.ru.magone.model;
 import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.Subject;
 import com.xoul.ru.magone.model.spells.Spell;
+import com.xoul.ru.magone.model.spells.SpellStorage;
 
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
 public class GameModel implements Subject {
     Observer view;
+    Serializer serializer;
+    SpellStorage spellStorage;
     private PlayerModel currentPlayer;
     private PlayerModel player1;
     private PlayerModel player2;
     private int round;
 
-    public GameModel() {
-        player1 = new PlayerModel(new Hero(50, 1), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
-        player2 = new PlayerModel(new Hero(35, 2), 2, new LinkedList<Rune>(), new LinkedList<Effect>());
+    public GameModel() throws FileNotFoundException {
+        spellStorage = new SpellStorage();
+        serializer = new Serializer(spellStorage);
+        player1 = new PlayerModel(new Hero(50, 1), 2, new LinkedList<Rune>(), new LinkedList<Effect>(), spellStorage);
+        player2 = new PlayerModel(new Hero(35, 2), 2, new LinkedList<Rune>(), new LinkedList<Effect>(), spellStorage);
         currentPlayer = player1;
     }
 
@@ -38,7 +44,7 @@ public class GameModel implements Subject {
     }
 
     public void castASpell() {
-        Spell sp = currentPlayer.createSpell(currentPlayer,getEnemy());
+        Spell sp = currentPlayer.createSpell(currentPlayer, getEnemy());
         if (currentPlayer.getMp() >= sp.manaAmountToCut)
             currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
