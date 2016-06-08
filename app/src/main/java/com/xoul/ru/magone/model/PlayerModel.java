@@ -28,6 +28,7 @@ public class PlayerModel {
 
     public void addMP() {
         mp += hero.getMpcharge();
+        if (mp > 10) mp = 10;
     }
 
     public int getHp() {
