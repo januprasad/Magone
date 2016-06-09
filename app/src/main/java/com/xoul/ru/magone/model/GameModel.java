@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class GameModel implements Subject {
     Observer view;
     Serializer serializer;
-    SpellStorage spellStorage;
+    static SpellStorage spellStorage;
     private PlayerModel currentPlayer;
     private PlayerModel player1;
     private PlayerModel player2;
@@ -19,7 +19,8 @@ public class GameModel implements Subject {
 
     public GameModel() throws FileNotFoundException {
         spellStorage = new SpellStorage();
-        serializer = new Serializer(spellStorage);
+        serializer = new Serializer();
+        spellStorage = serializer.parse(spellStorage);
         player1 = new PlayerModel(new Hero(50, 1), 2, new LinkedList<Rune>(), new LinkedList<Effect>(), spellStorage);
         player2 = new PlayerModel(new Hero(35, 2), 2, new LinkedList<Rune>(), new LinkedList<Effect>(), spellStorage);
         currentPlayer = player1;
@@ -40,7 +41,7 @@ public class GameModel implements Subject {
         else {
             currentPlayer = player1;
         }
-        notifyObserver();
+   //     notifyObserver();
     }
 
     public void castASpell() {
@@ -49,7 +50,7 @@ public class GameModel implements Subject {
             currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
         getEnemy().clearEffects();
-        notifyObserver();
+     //  notifyObserver();
     }
 
     public PlayerModel getCurrentPlayer() {

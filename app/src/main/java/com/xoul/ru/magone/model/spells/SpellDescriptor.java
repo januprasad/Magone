@@ -12,6 +12,7 @@ public class SpellDescriptor {
     private EffectType effectType;
     private Target target;
     private String name;
+    private String description;
 
     public boolean isTargetable() {
         return targetable;
@@ -50,9 +51,7 @@ public class SpellDescriptor {
         return description;
     }
 
-    private String description;
-
-    public SpellDescriptor(boolean targetable, int damage, int heal, SpellType spellType, EffectType effectType, Target target, String name, String description,int manatocut) {
+    public SpellDescriptor(boolean targetable, int damage, int heal, SpellType spellType, EffectType effectType, Target target, String name, String description, int manatocut) {
         this.targetable = targetable;
         this.damage = damage;
         this.heal = heal;

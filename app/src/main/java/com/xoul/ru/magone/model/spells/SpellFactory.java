@@ -9,15 +9,15 @@ import com.xoul.ru.magone.model.Target;
 import java.util.List;
 
 public class SpellFactory {
-    public static Spell create(List<Rune> list, PlayerModel currentPlayer, PlayerModel enemy,SpellStorage spellStorage) {
-       SpellDescriptor sp = spellStorage.getSpellDescriptor(list);
-        Damage damage = new Damage(sp.getDamage(),sp.getEffectType());
+    public static Spell create(List<Rune> list, PlayerModel currentPlayer, PlayerModel enemy, SpellStorage spellStorage) {
+        SpellDescriptor sp = spellStorage.getSpellDescriptor(list);
+        Damage damage = new Damage(sp.getDamage(), sp.getEffectType());
         Heal heal = new Heal(sp.getHeal());
-        if(sp.getTarget() == Target.CURRENTPLAYER)
-            return new Spell(currentPlayer,sp.getSpellType(),heal,damage,sp.getManatocut());
-        if(sp.getTarget() == Target.ENEMY)
-            return new Spell(enemy,sp.getSpellType(),heal,damage,sp.getManatocut());
-        return new Spell(null,sp.getSpellType(),heal,damage,sp.getManatocut());
+        if (sp.getTarget() == Target.CURRENTPLAYER)
+            return new Spell(currentPlayer, sp.getSpellType(), heal, damage, sp.getManatocut());
+        if (sp.getTarget() == Target.ENEMY)
+            return new Spell(enemy, sp.getSpellType(), heal, damage, sp.getManatocut());
+        return new Spell(null, sp.getSpellType(), heal, damage, sp.getManatocut());
 
     }
 }

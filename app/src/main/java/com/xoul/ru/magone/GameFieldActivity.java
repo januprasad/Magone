@@ -2,6 +2,7 @@ package com.xoul.ru.magone;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.xoul.ru.magone.model.GameModel;
@@ -26,6 +27,7 @@ public class GameFieldActivity extends Activity {
             model = new GameModel();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Log.d("GameFieldActivity:","Shit happens");
         }
         GameController controller = new GameController(model, playerField1, playerField2);
     }

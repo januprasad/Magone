@@ -3,6 +3,8 @@ package com.xoul.ru.magone.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
@@ -13,7 +15,11 @@ public class PlayerModelTest {
 
     @Before
     public void init() {
-        gm = new GameModel();
+        try {
+            gm = new GameModel();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         pl1 = gm.getPlayer1();
         pl2 = gm.getPlayer2();
     }

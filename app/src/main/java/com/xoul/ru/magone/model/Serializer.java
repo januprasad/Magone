@@ -12,18 +12,18 @@ import java.io.FileReader;
 public class Serializer {
     private GsonBuilder gsonBuilder = new GsonBuilder();
     private Gson gson = gsonBuilder.create();
-    SpellStorage spellStorage;
     BufferedReader br;
+    SpellStorage spellStorage;
 
-    public Serializer(SpellStorage spellStorage) throws FileNotFoundException {
-        this.spellStorage = spellStorage;
-        parse();
+    public Serializer() throws FileNotFoundException {
+
     }
 
-    public void parse() throws FileNotFoundException {
+    public SpellStorage parse(SpellStorage spellStorage) throws FileNotFoundException {
         br = new BufferedReader(new FileReader("src/main/res/Spells.JSON"));
         spellStorage = gson.fromJson(br, SpellStorage.class);
         System.out.println(gson.toJson(spellStorage));
+        return spellStorage;
     }
 
 }
