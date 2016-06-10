@@ -1,7 +1,5 @@
 package com.xoul.ru.magone.view;
 
-import android.util.Log;
-
 import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.model.GameModel;
 import com.xoul.ru.magone.view.player.PlayerField;

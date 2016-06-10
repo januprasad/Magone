@@ -3,10 +3,12 @@ package com.xoul.ru.magone.model;
 import com.xoul.ru.magone.Observer;
 import com.xoul.ru.magone.Subject;
 import com.xoul.ru.magone.model.spells.Spell;
+import com.xoul.ru.magone.model.spells.SpellDescriptor;
 import com.xoul.ru.magone.model.spells.SpellStorage;
 
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class GameModel implements Subject {
     Observer view;
@@ -41,7 +43,7 @@ public class GameModel implements Subject {
         else {
             currentPlayer = player1;
         }
-   //     notifyObserver();
+        //     notifyObserver();
     }
 
     public void castASpell() {
@@ -50,7 +52,7 @@ public class GameModel implements Subject {
             currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
         getEnemy().clearEffects();
-     //  notifyObserver();
+        //  notifyObserver();
     }
 
     public PlayerModel getCurrentPlayer() {
@@ -88,4 +90,7 @@ public class GameModel implements Subject {
         view.update();
     }
 
+    public Map<String, SpellDescriptor> getSpellMap() {
+        return spellStorage.getSpellMap();
+    }
 }

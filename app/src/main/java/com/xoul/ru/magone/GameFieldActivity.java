@@ -27,7 +27,6 @@ public class GameFieldActivity extends Activity {
             model = new GameModel(serializer);
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d("GameFieldActivity:","Shit happens");
         }
         GameController controller = new GameController(model, playerField1, playerField2);
     }

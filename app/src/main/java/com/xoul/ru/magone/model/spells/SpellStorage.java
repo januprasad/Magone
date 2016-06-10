@@ -2,15 +2,19 @@ package com.xoul.ru.magone.model.spells;
 
 import com.xoul.ru.magone.model.Rune;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SpellStorage {
+    public Map<String, SpellDescriptor> getSpellMap() {
+        return spellMap;
+    }
+
     private  Map<String, SpellDescriptor> spellMap;
 
     public SpellStorage() {
-       spellMap = new HashMap<String, SpellDescriptor>();
+       spellMap = new LinkedHashMap<String, SpellDescriptor>();
     }
 
     public SpellDescriptor getSpellDescriptor(List<Rune> spell) {

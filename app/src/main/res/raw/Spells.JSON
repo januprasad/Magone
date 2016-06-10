@@ -7,7 +7,7 @@
       "spellType": "Heal",
       "effectType": "HEAL",
       "name": "HEAL",
-      "target":"CURRENTPLAYER",
+      "target": "CURRENTPLAYER",
       "description": "Простое и незамысловатое заклятие лечения, вполне подойдет для педиков",
       "manatocut": 1
     },
