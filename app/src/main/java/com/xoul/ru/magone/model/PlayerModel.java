@@ -4,6 +4,8 @@ import com.xoul.ru.magone.model.effects.BurningEffect;
 import com.xoul.ru.magone.model.effects.DeathEffect;
 import com.xoul.ru.magone.model.effects.HealEffect;
 import com.xoul.ru.magone.model.effects.WetEffect;
+import com.xoul.ru.magone.model.entitys.EndOfTurnEffectEntity;
+import com.xoul.ru.magone.model.entitys.PermanentEffectEntity;
 import com.xoul.ru.magone.model.spells.Spell;
 import com.xoul.ru.magone.model.spells.SpellFactory;
 import com.xoul.ru.magone.model.spells.SpellStorage;
@@ -13,15 +15,17 @@ import java.util.Iterator;
 import java.util.List;
 
 public class PlayerModel {
+    public List<Effect> currentEffects;
+    public List<Rune> currentSpell;
     private Hero hero;
     private int mp;
     private int maxSpellLength;
-    public List<Effect> currentEffects;
-    public List<Rune> currentSpell;
     private Spell spell;
     private SpellStorage spellStorage;
+    private EndOfTurnEffectEntity endOfTurnEffectEntity;
+    private PermanentEffectEntity permanentEffectEntity;
 
-    public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects,SpellStorage spellStorage) {
+    public PlayerModel(Hero hero, int mp, List<Rune> currentSpell, List<Effect> currentEffects, SpellStorage spellStorage) {
         this.hero = hero;
         this.mp = mp;
         this.currentSpell = currentSpell;
@@ -70,7 +74,7 @@ public class PlayerModel {
             spell.target.heal(spell.heal);
         }
         if (spell.spellType == SpellType.Buff) {
-            //вешаем эффект
+
         }
         if (spell.isSettingEffect() && spell.effectType != null)
             spell.target.addEffect(spell.effectType);
@@ -147,7 +151,7 @@ public class PlayerModel {
 
     //собирает заклинание из уже переданных
     public Spell createSpell(PlayerModel currentPlayer, PlayerModel enemy) {
-        spell = SpellFactory.create(currentSpell, currentPlayer, enemy,spellStorage);
+        spell = SpellFactory.create(currentSpell, currentPlayer, enemy, spellStorage);
         return spell;
     }
 
