@@ -3,18 +3,16 @@ package com.xoul.ru.magone;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.xoul.ru.magone.model.GameModel;
-import com.xoul.ru.magone.model.Rune;
-import com.xoul.ru.magone.view.Drawer;
+import com.xoul.ru.magone.model.Serializer;
 import com.xoul.ru.magone.view.player.PlayerField;
-import com.xoul.ru.magone.view.player.PlayerListener;
 
-import java.io.FileNotFoundException;
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class GameFieldActivity extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +22,10 @@ public class GameFieldActivity extends Activity {
         PlayerField playerField2 = (PlayerField) findViewById(R.id.playerField2);
         GameModel model = null;
         try {
-            model = new GameModel();
-        } catch (FileNotFoundException e) {
+            InputStream inputStream = getResources().openRawResource(R.raw.spells);
+            Serializer serializer = new Serializer(inputStream);
+            model = new GameModel(serializer);
+        } catch (IOException e) {
             e.printStackTrace();
             Log.d("GameFieldActivity:","Shit happens");
         }

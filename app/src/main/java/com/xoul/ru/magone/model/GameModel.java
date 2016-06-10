@@ -17,9 +17,9 @@ public class GameModel implements Subject {
     private PlayerModel player2;
     private int round;
 
-    public GameModel() throws FileNotFoundException {
+    public GameModel(Serializer serializer) throws FileNotFoundException {
         spellStorage = new SpellStorage();
-        serializer = new Serializer();
+        this.serializer = serializer;
         spellStorage = serializer.parse(spellStorage);
         player1 = new PlayerModel(new Hero(50, 1), 2, new LinkedList<Rune>(), new LinkedList<Effect>(), spellStorage);
         player2 = new PlayerModel(new Hero(35, 2), 2, new LinkedList<Rune>(), new LinkedList<Effect>(), spellStorage);
