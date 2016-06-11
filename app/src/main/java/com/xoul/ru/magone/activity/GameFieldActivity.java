@@ -1,4 +1,4 @@
-package com.xoul.ru.magone;
+package com.xoul.ru.magone.activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.xoul.ru.magone.GameController;
+import com.xoul.ru.magone.R;
 import com.xoul.ru.magone.activity.HelpOpener;
 import com.xoul.ru.magone.fragment.SpellListFragment;
 import com.xoul.ru.magone.model.GameModel;
