@@ -8,28 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.xoul.ru.magone.R;
+import com.xoul.ru.magone.activity.GameFieldActivity;
 import com.xoul.ru.magone.adapter.SpellAdapter;
-import com.xoul.ru.magone.model.EffectType;
-import com.xoul.ru.magone.model.Target;
 import com.xoul.ru.magone.model.spells.SpellDescriptor;
-import com.xoul.ru.magone.model.spells.SpellType;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class SpellListFragment extends Fragment {
-    // TODO replace with real data
-    private static List<SpellDescriptor> spells;
-
-    static {
-        spells = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            spells.add(new SpellDescriptor(false, 0, 0, SpellType.Damage, EffectType.SHIELD, Target.NOONE,
-                    "Title " + Integer.toString(i + 1), "Description",
-            0));
-        }
-    }
-
     private View backButton;
     private View.OnClickListener backButtonClickListener;
 
@@ -41,6 +28,9 @@ public class SpellListFragment extends Fragment {
         if (backButtonClickListener != null) {
             backButton.setOnClickListener(backButtonClickListener);
         }
+        List<SpellDescriptor> spells = new LinkedList<>();
+        Map<String, SpellDescriptor> spellMap = ((GameFieldActivity) getActivity()).getModel().getSpellMap();
+        spells.addAll(spellMap.values());
         listView.setAdapter(new SpellAdapter(getActivity(), spells));
         return view;
     }

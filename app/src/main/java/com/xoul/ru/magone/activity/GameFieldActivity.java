@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 import com.xoul.ru.magone.GameController;
 import com.xoul.ru.magone.R;
-import com.xoul.ru.magone.activity.HelpOpener;
 import com.xoul.ru.magone.fragment.SpellListFragment;
 import com.xoul.ru.magone.model.GameModel;
 import com.xoul.ru.magone.model.Serializer;
@@ -22,6 +21,8 @@ public class GameFieldActivity extends Activity implements HelpOpener {
     private SpellListFragment spellListFragment;
     private LinearLayout layout;
 
+    private GameModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,6 @@ public class GameFieldActivity extends Activity implements HelpOpener {
         PlayerField playerField1 = (PlayerField) findViewById(R.id.playerField1);
         PlayerField playerField2 = (PlayerField) findViewById(R.id.playerField2);
         layout = (LinearLayout) findViewById(R.id.container);
-        GameModel model = null;
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.spells);
             Serializer serializer = new Serializer(inputStream);
@@ -61,6 +61,10 @@ public class GameFieldActivity extends Activity implements HelpOpener {
             fragmentManager.popBackStack();
         }
         layout.setRotation(0);
+    }
+
+    public GameModel getModel() {
+        return model;
     }
 
     private class CloseHelpButtonListener implements View.OnClickListener {
