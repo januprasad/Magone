@@ -2,6 +2,7 @@ package com.xoul.ru.magone;
 
 import android.util.Log;
 
+import com.xoul.ru.magone.activity.HelpOpener;
 import com.xoul.ru.magone.model.GameModel;
 import com.xoul.ru.magone.model.PlayerModel;
 import com.xoul.ru.magone.model.Rune;
@@ -20,16 +21,18 @@ public class GameController implements PlayerListener {
     private PlayerField player1;
     private PlayerField player2;
     private boolean isPlayer1;
+    private HelpOpener helpOpener;
 
     private PlayerModel player1model;
     private PlayerModel player2model;
 
     private List<Rune> spell;
 
-    public GameController(GameModel model, PlayerField player1, PlayerField player2) {
+    public GameController(GameModel model, PlayerField player1, PlayerField player2, HelpOpener helpOpener) {
         this.model = model;
         this.player1 = player1;
         this.player2 = player2;
+        this.helpOpener = helpOpener;
         this.player1.setListener(this);
         this.player2.setListener(this);
         drawer = new Drawer(model, player1, player2);
@@ -82,7 +85,7 @@ public class GameController implements PlayerListener {
 
     @Override
     public void onHelp() {
-        Log.d("PlayerField", "Help button clicked");
+        helpOpener.openHelp(!isPlayer1);
     }
 
     @Override
