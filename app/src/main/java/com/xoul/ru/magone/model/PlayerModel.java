@@ -58,9 +58,9 @@ public class PlayerModel {
                     eff.damage(spell.damage);
                     if (eff.isOpposite(spell.effectType))
                         spell.findOppositEffect();//проверяем вешать ли еффект
-
                 }
             //наносим урон цели
+
             spell.target.damage(spell.damage);
         }
         if (spell.spellType == SpellType.Heal) {
@@ -155,6 +155,13 @@ public class PlayerModel {
         return spell;
     }
 
+    public boolean hasSpellATarget(){
+       return spell.hasTarget();
+    }
+
+    public void setSpellTarget(PlayerModel target){
+        spell.setTarget(target);
+    }
     public void endTurnEffect(int heal, int damage) {
         heal(new Heal(heal));
         damage(new Damage(damage, null));
