@@ -11,9 +11,9 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class GameModel implements Subject {
+    static SpellStorage spellStorage;
     Observer view;
     Serializer serializer;
-    static SpellStorage spellStorage;
     private PlayerModel currentPlayer;
     private PlayerModel player1;
     private PlayerModel player2;
@@ -43,7 +43,7 @@ public class GameModel implements Subject {
         else {
             currentPlayer = player1;
         }
-        //     notifyObserver();
+        notifyObserver();
     }
 
     public void castASpell() {
@@ -52,7 +52,7 @@ public class GameModel implements Subject {
             currentPlayer.setSpell(sp);
         currentPlayer.clearCurrenSpell();
         getEnemy().clearEffects();
-        //  notifyObserver();
+        notifyObserver();
     }
 
     public PlayerModel getCurrentPlayer() {
