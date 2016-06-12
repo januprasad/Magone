@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.xoul.ru.magone.GameController;
 import com.xoul.ru.magone.R;
+import com.xoul.ru.magone.fragment.GameOverFragment;
 import com.xoul.ru.magone.fragment.SpellListFragment;
 import com.xoul.ru.magone.model.GameModel;
 import com.xoul.ru.magone.model.Serializer;
@@ -19,6 +20,7 @@ import java.io.InputStream;
 
 public class GameFieldActivity extends Activity implements HelpOpener {
     private SpellListFragment spellListFragment;
+    private GameOverFragment gameOverFragment;
     private LinearLayout layout;
 
     private GameModel model;
@@ -41,6 +43,7 @@ public class GameFieldActivity extends Activity implements HelpOpener {
 
         spellListFragment = new SpellListFragment();
         spellListFragment.setBackButtonClickListener(new CloseHelpButtonListener());
+        gameOverFragment = new GameOverFragment();
     }
 
     @Override
@@ -61,6 +64,20 @@ public class GameFieldActivity extends Activity implements HelpOpener {
             fragmentManager.popBackStack();
         }
         layout.setRotation(0);
+    }
+
+    public void openGameOver(boolean rotated) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.container, gameOverFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        if (rotated) {
+            layout.setRotation(180);
+        }
+    }
+
+    public void closeGameOver() {
+        closeHelp();
     }
 
     public GameModel getModel() {
