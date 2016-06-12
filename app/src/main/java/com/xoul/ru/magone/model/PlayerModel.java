@@ -144,6 +144,8 @@ public class PlayerModel {
 
     //для каждого эффекта из текущих вызывает метод оповещающий эффекты о конце текущего хода
     public void endOfTurn(PlayerModel currentPlayer) {
+        if(endOfTurnEffectEntity != null)
+            endOfTurnEffectEntity.effect(hero,this);
         for (Effect eff : currentEffects) {
             eff.endOfTurn(currentPlayer);
         }
