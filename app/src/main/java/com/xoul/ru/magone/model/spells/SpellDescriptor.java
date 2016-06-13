@@ -2,6 +2,7 @@ package com.xoul.ru.magone.model.spells;
 
 import com.xoul.ru.magone.model.EffectType;
 import com.xoul.ru.magone.model.Target;
+import com.xoul.ru.magone.model.entitys.SpawnNamesOfEntitys;
 
 public class SpellDescriptor {
     private boolean targetable;
@@ -13,6 +14,20 @@ public class SpellDescriptor {
     private Target target;
     private String name;
     private String description;
+    private SpawnNamesOfEntitys SpawnName;
+
+    public SpellDescriptor(boolean targetable, int damage, int heal, SpellType spellType, EffectType effectType, Target target, String name, String description, int manatocut, SpawnNamesOfEntitys SpawnName) {
+        this.targetable = targetable;
+        this.damage = damage;
+        this.heal = heal;
+        this.spellType = spellType;
+        this.effectType = effectType;
+        this.target = target;
+        this.name = name;
+        this.description = description;
+        this.manatocut = manatocut;
+        this.SpawnName = SpawnName;
+    }
 
     public boolean isTargetable() {
         return targetable;
@@ -49,17 +64,5 @@ public class SpellDescriptor {
     public String getDescription() {
 
         return description;
-    }
-
-    public SpellDescriptor(boolean targetable, int damage, int heal, SpellType spellType, EffectType effectType, Target target, String name, String description, int manatocut) {
-        this.targetable = targetable;
-        this.damage = damage;
-        this.heal = heal;
-        this.spellType = spellType;
-        this.effectType = effectType;
-        this.target = target;
-        this.name = name;
-        this.description = description;
-        this.manatocut = manatocut;
     }
 }
