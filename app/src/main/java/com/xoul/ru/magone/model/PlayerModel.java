@@ -4,7 +4,9 @@ import com.xoul.ru.magone.model.effects.BurningEffect;
 import com.xoul.ru.magone.model.effects.DeathEffect;
 import com.xoul.ru.magone.model.effects.HealEffect;
 import com.xoul.ru.magone.model.effects.WetEffect;
+import com.xoul.ru.magone.model.entitys.DoubleDamageEntity;
 import com.xoul.ru.magone.model.entitys.EndOfTurnEffectEntity;
+import com.xoul.ru.magone.model.entitys.HalfDamageEntity;
 import com.xoul.ru.magone.model.entitys.PermanentEffectEntity;
 import com.xoul.ru.magone.model.spells.Spell;
 import com.xoul.ru.magone.model.spells.SpellFactory;
@@ -60,7 +62,9 @@ public class PlayerModel {
                         spell.findOppositEffect();//проверяем вешать ли еффект
                 }
             //наносим урон цели
-
+            if (permanentEffectEntity != null)
+                if (permanentEffectEntity instanceof DoubleDamageEntity)
+                    permanentEffectEntity.effect(spell.damage, spell.target);
             spell.target.damage(spell.damage);
         }
         if (spell.spellType == SpellType.Heal) {
@@ -84,6 +88,9 @@ public class PlayerModel {
 
     //Наносит целочисленный урон игроку
     public void damage(Damage dmg) {
+        if (permanentEffectEntity != null)
+            if (permanentEffectEntity instanceof HalfDamageEntity)
+                permanentEffectEntity.effect(dmg, this);
         hero.damage(dmg);
     }
 
@@ -144,8 +151,8 @@ public class PlayerModel {
 
     //для каждого эффекта из текущих вызывает метод оповещающий эффекты о конце текущего хода
     public void endOfTurn(PlayerModel currentPlayer) {
-        if(endOfTurnEffectEntity != null)
-            endOfTurnEffectEntity.effect(hero,this);
+        if (endOfTurnEffectEntity != null)
+            endOfTurnEffectEntity.effect(hero, this);
         for (Effect eff : currentEffects) {
             eff.endOfTurn(currentPlayer);
         }
@@ -157,13 +164,14 @@ public class PlayerModel {
         return spell;
     }
 
-    public boolean hasSpellATarget(){
-       return spell.hasTarget();
+    public boolean hasSpellATarget() {
+        return spell.hasTarget();
     }
 
-    public void setSpellTarget(PlayerModel target){
+    public void setSpellTarget(PlayerModel target) {
         spell.setTarget(target);
     }
+
     public void endTurnEffect(int heal, int damage) {
         heal(new Heal(heal));
         damage(new Damage(damage, null));
